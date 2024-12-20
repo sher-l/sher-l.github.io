@@ -4,9 +4,14 @@ SEOTitle: sher-l | Blog
 description: ^ ^
 url: "https://sher-l.github.io"
 
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  
 # Sidebar settings
 sidebar: true
 
 # post time
 future: true
 timezone: Asia/Shanghai
+
