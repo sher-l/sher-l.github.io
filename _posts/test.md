@@ -3,4 +3,6 @@ layout: post
 title: "test Post"
 date: 2024-12-20
 ---
-test
+
+Built-in Jekyll theme for GitHub Pages.
+https://pages.github.com/themes/
