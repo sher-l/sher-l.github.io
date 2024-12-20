@@ -1,3 +1,8 @@
 theme: jekyll-theme-Slate
 title: icekiki's homepage
+SEOTitle: sher-l | Blog
 description: ^ ^
+url: "https://sher-l.github.io"
+
+# Sidebar settings
+sidebar: true
