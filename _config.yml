@@ -2,7 +2,6 @@ theme: minima
 title: icekiki's homepage
 SEOTitle: sher-l | Blog
 description: ^ ^
-url: "https://sher-l.github.io"
 
 plugins:
   - jekyll-feed
