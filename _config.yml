@@ -3,13 +3,6 @@ title: icekiki's homepage
 SEOTitle: sher-l | Blog
 description: ^ ^
 
-plugins:
-  - jekyll-feed
-  - jekyll-sitemap
-  
-# Sidebar settings
-sidebar: true
-
 # post time
 future: true
 timezone: Asia/Shanghai
