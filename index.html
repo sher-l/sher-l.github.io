@@ -1,0 +1,14 @@
+---
+layout: default
+title: Home
+---
+<h1>Welcome to My Blog</h1>
+<p>This is my custom homepage. Below are my posts:</p>
+
+<ul>
+{% for post in site.posts %}
+  <li>
+    <a href="{{ post.url }}">{{ post.title }}</a> - {{ post.date | date: "%Y-%m-%d" }}
+  </li>
+{% endfor %}
+</ul>
