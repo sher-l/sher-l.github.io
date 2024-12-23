@@ -7,3 +7,7 @@ description: ^ ^
 future: true
 timezone: Asia/Shanghai
 
+# sitemap
+url: "https://sher-l.github.io" 
+plugins:
+  - jekyll-sitemap
