@@ -171,12 +171,34 @@ img {
 
 .site-header.is-floating .nav-shell {
   width: min(960px, calc(100vw - 32px));
-  padding: 10px 20px;
+  padding: 7px 18px;
   border: 1px solid var(--line-strong);
-  border-radius: 22px;
-  background: rgba(255, 255, 255, 0.92);
-  box-shadow: 0 18px 34px rgba(110, 115, 153, 0.12);
-  backdrop-filter: blur(18px);
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.76);
+  box-shadow: 0 12px 24px rgba(110, 115, 153, 0.08);
+  backdrop-filter: blur(16px);
+}
+
+.site-header.is-floating .brandmark-label {
+  font-size: 1.55rem;
+}
+
+.site-header.is-floating .brandmark-subtle {
+  font-size: 0.72rem;
+}
+
+.site-header.is-floating .site-nav {
+  gap: 20px;
+}
+
+.site-header.is-floating .site-nav a {
+  font-size: 0.98rem;
+}
+
+.site-header.is-floating .site-nav-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 9px;
 }
 
 .site-header.is-floating.is-hidden .nav-shell,
