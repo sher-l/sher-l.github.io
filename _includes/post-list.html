@@ -18,7 +18,7 @@
         <a class="post-card-home-shell" href="{{ post.url | relative_url }}" aria-label="{{ post.title }}">
           <time class="post-card-date post-card-date-home" datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %-d, %Y" }}</time>
           <h3 class="post-card-title-home">{{ post.title }}</h3>
-          <span class="post-card-arrow post-card-arrow-home" aria-hidden="true">›</span>
+          <span class="post-card-arrow post-card-arrow-home" aria-hidden="true"></span>
         </a>
       </article>
     {% else %}
@@ -29,7 +29,7 @@
             <div class="post-card-main">
               <div class="post-card-title-row">
                 <h3>{{ post.title }}</h3>
-                <span class="post-card-arrow" aria-hidden="true">›</span>
+                <span class="post-card-arrow" aria-hidden="true"></span>
               </div>
               <p>{{ post.excerpt | strip_html | strip_newlines | truncate: 160 }}</p>
               <div class="post-card-stats">

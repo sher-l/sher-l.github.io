@@ -26,7 +26,7 @@
     <div class="search-results{% if include.results_compact %} search-results-compact{% endif %}" data-search-results></div>
     {% unless include.more_link == false or include.more_link == 'false' %}
       <a class="search-more-link" href="{{ '/search/' | relative_url }}" data-search-more hidden>
-        {{ include.more_label | default: '打开完整搜索页 ›' }}
+        {{ include.more_label | default: '打开完整搜索页' }}<span class="inline-arrow" aria-hidden="true"></span>
       </a>
     {% endunless %}
   {% endif %}

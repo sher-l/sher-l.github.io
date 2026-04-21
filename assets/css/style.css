@@ -722,7 +722,13 @@ img {
 }
 
 .back-link::before {
-  content: "‹";
+  content: "";
+  display: inline-block;
+  width: 0.52rem;
+  height: 0.52rem;
+  border-top: 1.8px solid currentColor;
+  border-left: 1.8px solid currentColor;
+  transform: rotate(-45deg);
 }
 
 .collection-shell > .back-link,
@@ -924,6 +930,8 @@ img {
 
 .search-more-link {
   display: inline-flex;
+  align-items: center;
+  gap: 0.36em;
   margin-top: 14px;
   color: var(--ink);
   text-decoration: underline;
@@ -1076,11 +1084,31 @@ img {
   white-space: nowrap;
 }
 
+.post-card-arrow,
+.post-card-arrow-home,
+.inline-arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+}
+
+.post-card-arrow::before,
+.post-card-arrow-home::before,
+.inline-arrow::before {
+  content: "";
+  display: block;
+  width: 0.52rem;
+  height: 0.52rem;
+  border-top: 1.8px solid currentColor;
+  border-right: 1.8px solid currentColor;
+  transform: rotate(45deg);
+}
+
 .post-card-arrow-home {
   justify-self: end;
-  font-size: 1.8rem;
-  line-height: 1;
-  font-weight: 300;
+  width: 1rem;
+  height: 1rem;
 }
 
 .post-card-home-shell:hover .post-card-title-home,
@@ -1174,12 +1202,17 @@ img {
 }
 
 .post-card-arrow {
-  flex: 0 0 auto;
   color: var(--ink-muted);
-  font-size: 1.9rem;
-  line-height: 1;
-  font-weight: 300;
+  width: 1rem;
+  height: 1rem;
   transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.inline-arrow {
+  width: 0.75rem;
+  height: 0.75rem;
+  margin-left: 0.05em;
+  vertical-align: middle;
 }
 
 .post-card-jump,
