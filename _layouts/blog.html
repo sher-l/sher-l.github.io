@@ -2,38 +2,27 @@
 layout: default
 ---
 
-<section class="collection-shell">
+<section class="collection-shell collection-shell-blog">
   <a class="back-link" href="{{ '/' | relative_url }}" data-back-link>Back</a>
 
   <header class="collection-head" id="content-header">
     <h1>{{ page.title }}</h1>
-    {% if page.description %}
-      <p class="page-description">{{ page.description }}</p>
-    {% endif %}
   </header>
 
   <div class="collection-grid">
     <section class="collection-main" id="content">
-      <div class="collection-panel">
-        <div class="collection-summary">
-          <span>Showing {{ site.posts | size }} posts</span>
-          <a href="{{ '/archive/' | relative_url }}">View all posts by years &rarr;</a>
-        </div>
-        {{ content }}
+      <div class="collection-summary">
+        <span>Showing {{ site.posts | size }} posts</span>
+        <a href="{{ '/archive/' | relative_url }}">View all posts by years &rarr;</a>
       </div>
+      {{ content }}
     </section>
 
-    <aside class="collection-side" id="sidebar">
-      <section class="side-block">
+    <aside class="collection-side blog-side" id="sidebar">
+      <section class="blog-side-block">
         <h2>Tags</h2>
         {% include tag-cloud.html %}
         <a class="side-more" href="{{ '/tags/' | relative_url }}">View all &rarr;</a>
-      </section>
-
-      <section class="side-block">
-        <h2>Archive</h2>
-        <p>Browse all posts and notes by year.</p>
-        <a class="side-utility" href="{{ '/archive/' | relative_url }}">Go to archive &rarr;</a>
       </section>
     </aside>
   </div>

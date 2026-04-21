@@ -603,9 +603,9 @@ img {
   justify-content: space-between;
   align-items: center;
   gap: 18px;
-  margin-bottom: 22px;
-  padding-bottom: 16px;
-  border-bottom: 1px solid var(--line);
+  margin-bottom: 18px;
+  padding-bottom: 0;
+  border-bottom: 0;
   color: var(--ink-muted);
   font-size: 0.95rem;
 }
@@ -619,6 +619,60 @@ img {
   display: flex;
   flex-direction: column;
   gap: 18px;
+}
+
+.collection-shell-blog .collection-grid {
+  align-items: start;
+  gap: 40px;
+}
+
+.collection-shell-blog .collection-summary a,
+.collection-shell-blog .side-more {
+  text-decoration: none;
+}
+
+.collection-shell-blog .collection-summary a:hover,
+.collection-shell-blog .collection-summary a:focus-visible,
+.collection-shell-blog .side-more:hover,
+.collection-shell-blog .side-more:focus-visible {
+  color: var(--accent);
+}
+
+.blog-side {
+  position: sticky;
+  top: 110px;
+  align-self: start;
+}
+
+.blog-side-block {
+  padding-top: 4px;
+}
+
+.blog-side-block h2 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 16px;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.blog-side-block h2::before {
+  content: "#";
+  color: var(--ink);
+  font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+  font-size: 1.15rem;
+  line-height: 1;
+}
+
+.collection-shell-blog .tag-cloud {
+  gap: 10px;
+}
+
+.collection-shell-blog .side-more {
+  display: block;
+  margin-top: 16px;
+  text-align: right;
 }
 
 .post-side {
@@ -913,19 +967,29 @@ img {
 
 .post-card-shell {
   display: flex;
-  gap: 22px;
-  padding: 18px 20px;
+  flex-direction: column;
+  gap: 12px;
+  padding: 22px 24px 18px;
   border: 1px solid var(--line);
-  border-radius: 22px;
-  background: rgba(255, 255, 255, 0.46);
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.58);
   box-shadow: var(--shadow);
-  transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease;
+  transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease, transform 0.2s ease;
 }
 
 .post-card-shell:hover,
 .post-card-shell:focus-within {
   border-color: var(--line-strong);
-  background: rgba(255, 255, 255, 0.58);
+  background: rgba(255, 255, 255, 0.72);
+  transform: translateY(-1px);
+}
+
+.post-card-link {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+  color: inherit;
 }
 
 .post-card-list-home {
@@ -1030,34 +1094,32 @@ img {
 
 .post-card-main {
   min-width: 0;
-  flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
 }
 
 .post-card-title-row {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: space-between;
-  gap: 16px;
-}
-
-.post-card-title-link {
-  min-width: 0;
-  flex: 1;
+  gap: 18px;
 }
 
 .post-card-date {
-  font-size: 0.82rem;
+  font-size: 0.84rem;
   font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
   letter-spacing: 0.02em;
+  line-height: 1;
 }
 
 .post-card h3 {
   margin: 0;
-  font-size: clamp(1.2rem, 2.1vw, 1.5rem);
-  line-height: 1.42;
+  min-width: 0;
+  flex: 1;
+  font-size: clamp(1.2rem, 2vw, 1.55rem);
+  font-weight: 500;
+  line-height: 1.38;
   overflow: hidden;
   display: -webkit-box;
   -webkit-box-orient: vertical;
@@ -1067,7 +1129,9 @@ img {
 .post-card p {
   margin: 0;
   color: var(--ink-muted);
-  max-width: none;
+  max-width: 44rem;
+  font-size: 0.98rem;
+  line-height: 1.68;
   overflow: hidden;
   display: -webkit-box;
   -webkit-box-orient: vertical;
@@ -1077,8 +1141,10 @@ img {
 .post-card-arrow {
   flex: 0 0 auto;
   color: var(--ink-muted);
-  font-size: 1.25rem;
+  font-size: 1.9rem;
   line-height: 1;
+  font-weight: 300;
+  transition: transform 0.2s ease, color 0.2s ease;
 }
 
 .post-card-jump,
@@ -1103,10 +1169,29 @@ img {
 
 .post-card-stats {
   color: var(--ink-muted);
+  gap: 8px 14px;
+  font-size: 0.94rem;
 }
 
 .post-card-meta {
-  padding-top: 2px;
+  padding-top: 0;
+}
+
+.post-card-shell:hover .post-card-link,
+.post-card-shell:focus-within .post-card-link {
+  color: var(--accent);
+}
+
+.post-card-shell:hover .post-card-arrow,
+.post-card-shell:focus-within .post-card-arrow {
+  transform: translateX(4px);
+}
+
+.post-card-shell:hover .post-card-stats,
+.post-card-shell:focus-within .post-card-stats,
+.post-card-shell:hover p,
+.post-card-shell:focus-within p {
+  color: inherit;
 }
 
 .article-meta-line {
@@ -1409,7 +1494,7 @@ img {
   }
 
   .post-card-title-row {
-    flex-direction: column;
+    gap: 10px;
   }
 
   .brandmark-label {

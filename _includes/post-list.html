@@ -24,29 +24,27 @@
     {% else %}
       <article class="post-card">
         <div class="post-card-shell">
-          <div class="post-card-main">
+          <a class="post-card-link" href="{{ post.url | relative_url }}" aria-label="{{ post.title }}">
             <time class="post-card-date" datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %-d, %Y" }}</time>
-            <div class="post-card-title-row">
-              <a class="post-card-title-link" href="{{ post.url | relative_url }}">
+            <div class="post-card-main">
+              <div class="post-card-title-row">
                 <h3>{{ post.title }}</h3>
-              </a>
-              <a class="post-card-jump" href="{{ post.url | relative_url }}" aria-label="{{ post.title }}">
-                <span class="post-card-arrow">&rarr;</span>
-              </a>
-            </div>
-            <p>{{ post.excerpt | strip_html | strip_newlines | truncate: 180 }}</p>
-            <div class="post-card-stats">
-              <span>{{ reading_minutes }} min read</span>
-              <span>中文</span>
-            </div>
-            {% if post.categories and post.categories != empty %}
-              <div class="post-card-meta">
-                {% for category in post.categories %}
-                  <a href="{{ '/tags/' | relative_url }}#{{ category | slugify }}"><span>{{ category }}</span></a>
-                {% endfor %}
+                <span class="post-card-arrow" aria-hidden="true">&rsaquo;</span>
               </div>
-            {% endif %}
-          </div>
+              <p>{{ post.excerpt | strip_html | strip_newlines | truncate: 160 }}</p>
+              <div class="post-card-stats">
+                <span>{{ reading_minutes }} min read</span>
+                <span>中文</span>
+              </div>
+            </div>
+          </a>
+          {% if post.categories and post.categories != empty %}
+            <div class="post-card-meta">
+              {% for category in post.categories %}
+                <a href="{{ '/tags/' | relative_url }}#{{ category | slugify }}"><span>{{ category }}</span></a>
+              {% endfor %}
+            </div>
+          {% endif %}
         </div>
       </article>
     {% endif %}
