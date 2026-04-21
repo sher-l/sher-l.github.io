@@ -1328,6 +1328,13 @@ img {
   text-underline-offset: 0.18em;
 }
 
+.page-content a:hover,
+.page-content a:focus-visible,
+.section-content a:hover,
+.section-content a:focus-visible {
+  color: var(--accent);
+}
+
 .post-body code {
   padding: 0.15em 0.4em;
   border-radius: 8px;
