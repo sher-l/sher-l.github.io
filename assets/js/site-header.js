@@ -1,5 +1,9 @@
 document.addEventListener("DOMContentLoaded", () => {
   const backLinks = Array.from(document.querySelectorAll("[data-back-link]"));
+  const scrollDock = document.querySelector("[data-scroll-dock]");
+  const scrollTopButton = document.querySelector("[data-scroll-top]");
+  const scrollBottomButton = document.querySelector("[data-scroll-bottom]");
+
   backLinks.forEach((link) => {
     link.addEventListener("click", (event) => {
       if (window.history.length <= 1 || !document.referrer) return;
@@ -13,6 +17,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
       event.preventDefault();
       window.history.back();
+    });
+  });
+
+  scrollTopButton?.addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+
+  scrollBottomButton?.addEventListener("click", () => {
+    window.scrollTo({
+      top: Math.max(document.body.scrollHeight, document.documentElement.scrollHeight),
+      behavior: "smooth",
     });
   });
 
@@ -37,6 +52,10 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     header.classList.toggle("is-floating", isFloating);
+    scrollDock?.classList.toggle("is-floating", isFloating);
+    if (scrollDock) {
+      scrollDock.setAttribute("aria-hidden", String(!isFloating));
+    }
 
     if (!isFloating || searchOpen) {
       header.classList.remove("is-hidden");
