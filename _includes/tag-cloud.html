@@ -1,5 +1,5 @@
 <div class="tag-cloud">
   {% for category in site.categories %}
-    <a href="{{ '/tags/#' | append: (category[0] | slugify) | relative_url }}"><span>{{ category[0] }}</span></a>
+    <a href="{{ '/tags/' | relative_url }}#{{ category[0] | slugify }}"><span>{{ category[0] }}</span></a>
   {% endfor %}
 </div>

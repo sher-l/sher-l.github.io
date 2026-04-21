@@ -15,7 +15,7 @@
           <div class="post-card-meta">
             {% if post.categories and post.categories != empty %}
               {% for category in post.categories %}
-                <a href="{{ '/tags/#' | append: (category | slugify) | relative_url }}"><span>{{ category }}</span></a>
+                <a href="{{ '/tags/' | relative_url }}#{{ category | slugify }}"><span>{{ category }}</span></a>
               {% endfor %}
             {% endif %}
           </div>
