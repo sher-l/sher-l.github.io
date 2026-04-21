@@ -6,12 +6,24 @@
 
 <div class="post-card-list">
   {% for post in site.posts limit: list_limit %}
+    {% assign reading_units = post.content | strip_html | strip_newlines | size %}
+    {% assign reading_minutes = reading_units | divided_by: 360 %}
+    {% if reading_minutes < 1 %}
+      {% assign reading_minutes = 1 %}
+    {% endif %}
     <article class="post-card">
       <a class="post-card-link" href="{{ post.url | relative_url }}">
         <div class="post-card-main">
           <time class="post-card-date" datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %-d, %Y" }}</time>
-          <h3>{{ post.title }}</h3>
+          <div class="post-card-head">
+            <h3>{{ post.title }}</h3>
+            <span class="post-card-arrow">→</span>
+          </div>
           <p>{{ post.excerpt | strip_html | strip_newlines | truncate: 132 }}</p>
+          <div class="post-card-stats">
+            <span>{{ reading_minutes }} min read</span>
+            <span>中文</span>
+          </div>
           <div class="post-card-meta">
             {% if post.categories and post.categories != empty %}
               {% for category in post.categories %}
@@ -20,7 +32,6 @@
             {% endif %}
           </div>
         </div>
-        <span class="post-card-arrow">&gt;</span>
       </a>
     </article>
   {% endfor %}

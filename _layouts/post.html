@@ -2,44 +2,62 @@
 layout: default
 ---
 
-<article class="post-layout">
-  <div class="post-main">
-    <header class="post-head post-head-compact">
-      <a class="back-link" href="{{ '/blog/' | relative_url }}">← Back</a>
-      <div class="post-meta">
-        <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%b %-d, %Y" }}</time>
-        <span>中文</span>
-        {% if page.categories and page.categories != empty %}
-          <span>{{ page.categories | join: " / " }}</span>
+{% assign reading_units = content | strip_html | strip_newlines | size %}
+{% assign reading_minutes = reading_units | divided_by: 360 %}
+{% if reading_minutes < 1 %}
+  {% assign reading_minutes = 1 %}
+{% endif %}
+{% assign article_deck = page.description | default: page.excerpt | strip_html | strip_newlines | truncate: 140 %}
+
+<article class="reading-shell">
+  <a class="back-link" href="{{ '/blog/' | relative_url }}">Back</a>
+
+  <div class="reading-grid">
+    <div class="reading-main">
+      <header class="article-header" id="content-header">
+        <div class="article-meta-line">
+          <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%b %-d, %Y" }}</time>
+          <span>{{ reading_minutes }} min read</span>
+          <span>中文</span>
+          {% if page.categories and page.categories != empty %}
+            <span>
+              {% for category in page.categories %}
+                <a href="{{ '/tags/' | relative_url }}#{{ category | slugify }}"># {{ category }}</a>{% unless forloop.last %} / {% endunless %}
+              {% endfor %}
+            </span>
+          {% endif %}
+        </div>
+        <h1>{{ page.title }}</h1>
+        {% if article_deck != blank %}
+          <p class="article-deck">{{ article_deck }}</p>
         {% endif %}
+      </header>
+
+      <div class="post-body" id="content">
+        {{ content }}
       </div>
-      <h1>{{ page.title }}</h1>
-    </header>
 
-    <div class="post-body">
-      {{ content }}
+      <footer class="post-footer-nav">
+        {% if page.previous %}
+          <a class="post-nav-card" href="{{ page.previous.url | relative_url }}">
+            <span>上一篇</span>
+            <strong>{{ page.previous.title }}</strong>
+          </a>
+        {% endif %}
+        {% if page.next %}
+          <a class="post-nav-card" href="{{ page.next.url | relative_url }}">
+            <span>下一篇</span>
+            <strong>{{ page.next.title }}</strong>
+          </a>
+        {% endif %}
+      </footer>
     </div>
 
-    <footer class="post-footer-nav">
-      {% if page.previous %}
-        <a class="post-nav-card" href="{{ page.previous.url | relative_url }}">
-          <span>上一篇</span>
-          <strong>{{ page.previous.title }}</strong>
-        </a>
-      {% endif %}
-      {% if page.next %}
-        <a class="post-nav-card" href="{{ page.next.url | relative_url }}">
-          <span>下一篇</span>
-          <strong>{{ page.next.title }}</strong>
-        </a>
-      {% endif %}
-    </footer>
+    <aside class="post-side">
+      <div class="toc-card" id="toc-card">
+        <p class="side-title">Table of Contents</p>
+        <div class="toc-list" id="toc-list"></div>
+      </div>
+    </aside>
   </div>
-
-  <aside class="post-side">
-    <div class="toc-card" id="toc-card">
-      <p class="side-title">Table of Contents</p>
-      <div class="toc-list" id="toc-list"></div>
-    </div>
-  </aside>
 </article>

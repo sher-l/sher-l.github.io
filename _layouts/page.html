@@ -2,7 +2,18 @@
 layout: default
 ---
 
+{% assign back_url = page.back_url %}
+{% if back_url == nil %}
+  {% if page.url == '/archive/' or page.url == '/tags/' or page.url == '/search/' %}
+    {% assign back_url = '/blog/' %}
+  {% else %}
+    {% assign back_url = '/' %}
+  {% endif %}
+{% endif %}
+
 <article class="page-shell">
+  <a class="back-link" href="{{ back_url | relative_url }}">Back</a>
+
   <header class="page-head">
     <p class="page-eyebrow">{{ page.eyebrow | default: page.title }}</p>
     <h1>{{ page.title }}</h1>

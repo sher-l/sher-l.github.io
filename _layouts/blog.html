@@ -2,55 +2,45 @@
 layout: default
 ---
 
-<section class="blog-shell">
-  <div class="page-head">
-    <p class="page-eyebrow">{{ page.eyebrow | default: "Blog" }}</p>
+<section class="collection-shell">
+  <a class="back-link" href="{{ '/' | relative_url }}">Back</a>
+
+  <header class="collection-head" id="content-header">
     <h1>{{ page.title }}</h1>
     {% if page.description %}
       <p class="page-description">{{ page.description }}</p>
     {% endif %}
-  </div>
+  </header>
 
-  <div class="blog-grid">
-    <div class="blog-main">
+  <div class="collection-grid">
+    <section class="collection-main" id="content">
+      <div class="collection-summary">
+        <span>Showing {{ site.posts | size }} posts</span>
+        <a href="{{ '/archive/' | relative_url }}">View all posts by years →</a>
+      </div>
       {{ content }}
-    </div>
+    </section>
 
-    <aside class="blog-side">
-      <section class="side-card">
-        <p class="side-title">Search</p>
+    <aside class="collection-side" id="sidebar">
+      <section class="side-block">
+        <h2>Tags</h2>
+        {% include tag-cloud.html %}
+        <a class="side-more" href="{{ '/tags/' | relative_url }}">View all →</a>
+      </section>
+
+      <section class="side-block">
+        <h2>Archive</h2>
+        <p>按年份浏览全部文章与记录。</p>
+        <a class="side-utility" href="{{ '/archive/' | relative_url }}">Go to archive →</a>
+      </section>
+
+      <section class="side-block">
+        <h2>Search</h2>
         {% include search-box.html
           id="blog-search-input"
-          label="搜索站内内容"
+          label="Search posts"
           placeholder="例如：windows、jekyll、r"
-          hint="直接跳到搜索页并保留关键词。" %}
-      </section>
-
-      <section class="side-card">
-        <p class="side-title">Explore</p>
-        <div class="utility-links">
-          <a href="{{ '/archive/' | relative_url }}">
-            <strong>Archive</strong>
-            <span>{{ site.posts | size }} posts</span>
-          </a>
-          <a href="{{ '/tags/' | relative_url }}">
-            <strong>Tags</strong>
-            <span>{{ site.categories | size }} topics</span>
-          </a>
-          <a href="{{ '/projects/' | relative_url }}">Projects</a>
-          <a href="{{ site.links.github }}" target="_blank" rel="noreferrer">GitHub</a>
-          <a href="{{ site.links.orcid }}" target="_blank" rel="noreferrer">ORCID</a>
-        </div>
-      </section>
-
-      <section class="side-card">
-        <p class="side-title">Topic Index</p>
-        {% include category-index.html %}
-      </section>
-
-      <section class="side-card">
-        <p class="side-title">Tags</p>
-        {% include tag-cloud.html %}
+          hint="Keep search as a content utility, not a homepage hero block." %}
       </section>
     </aside>
   </div>

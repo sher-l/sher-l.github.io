@@ -1,19 +1,20 @@
 <header class="site-header">
   <div class="nav-shell">
     <a class="brandmark" href="{{ '/' | relative_url }}">
-      <span class="brandmark-label">IKL</span>
-      <span class="brandmark-subtle">{{ site.author.name }}</span>
+      <span class="brandmark-label">{{ site.author.name }}</span>
+      <span class="brandmark-subtle">{{ site.profile.handle }}</span>
     </a>
 
     <nav class="site-nav" aria-label="Primary">
-      <a class="{% if page.url == '/' %}active{% endif %}" href="{{ '/' | relative_url }}">Home</a>
-      <a class="{% if page.url == '/blog/' or page.layout == 'post' %}active{% endif %}" href="{{ '/blog/' | relative_url }}">Blog</a>
-      <a class="{% if page.url == '/archive/' %}active{% endif %}" href="{{ '/archive/' | relative_url }}">Archive</a>
-      <a class="{% if page.url == '/tags/' %}active{% endif %}" href="{{ '/tags/' | relative_url }}">Tags</a>
+      <a class="{% if page.url == '/blog/' or page.layout == 'post' or page.url == '/archive/' or page.url == '/tags/' or page.url == '/search/' %}active{% endif %}" href="{{ '/blog/' | relative_url }}">Blog</a>
       <a class="{% if page.url == '/projects/' %}active{% endif %}" href="{{ '/projects/' | relative_url }}">Projects</a>
       <a class="{% if page.url == '/links/' %}active{% endif %}" href="{{ '/links/' | relative_url }}">Links</a>
       <a class="{% if page.url == '/about/' %}active{% endif %}" href="{{ '/about/' | relative_url }}">About</a>
-      <a class="{% if page.url == '/search/' %}active{% endif %}" href="{{ '/search/' | relative_url }}">Search</a>
+      <a class="site-nav-icon {% if page.url == '/search/' %}active{% endif %}" href="{{ '/search/' | relative_url }}" aria-label="Search">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M10 4a6 6 0 1 0 3.9 10.56l4.77 4.77a1 1 0 0 0 1.41-1.41l-4.77-4.77A6 6 0 0 0 10 4Zm0 2a4 4 0 1 1 0 8a4 4 0 0 1 0-8Z"></path>
+        </svg>
+      </a>
     </nav>
   </div>
 </header>

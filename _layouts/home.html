@@ -3,90 +3,133 @@ layout: default
 ---
 
 <section class="home-shell">
-  <div class="home-intro-card">
-    <p class="page-eyebrow">IKL</p>
-    <h1>{{ site.title }}</h1>
-    <p class="home-intro-copy">{{ site.description }}</p>
-    <div class="home-intro-meta">
-      <span>{{ site.profile.summary }}</span>
+  <section class="home-hero" id="content-header">
+    <img
+      class="home-avatar"
+      src="https://github.com/{{ site.author.github }}.png?size=200"
+      alt="{{ site.author.name }}"
+      loading="eager">
+    <h1>{{ site.author.name }}</h1>
+    <p class="home-hero-tagline">{{ site.tagline | default: site.description }}</p>
+    <div class="home-label-row">
+      <span>{{ site.profile.handle }}</span>
       <span>{{ site.profile.focus }}</span>
-    </div>
-  </div>
-
-  <section class="feature-strip">
-    <div class="feature-strip-search">
-      {% include search-box.html
-        id="home-search-input"
-        label="站内搜索"
-        placeholder="例如：windows、jekyll、python"
-        hint="支持匹配文章标题、摘要、正文和标签。" %}
-    </div>
-
-    <div class="feature-strip-links">
-      <a href="{{ '/blog/' | relative_url }}">
-        <strong>Blog</strong>
-        <span>查看全部文章列表</span>
-      </a>
-      <a href="{{ '/tags/' | relative_url }}">
-        <strong>Tags</strong>
-        <span>按主题浏览内容</span>
-      </a>
-      <a href="{{ '/archive/' | relative_url }}">
-        <strong>Archive</strong>
-        <span>按时间归档查看</span>
-      </a>
+      <a href="{{ site.links.github }}" target="_blank" rel="noreferrer">GitHub</a>
+      <a href="{{ site.links.orcid }}" target="_blank" rel="noreferrer">ORCID</a>
     </div>
   </section>
 
-  <div class="blog-grid">
-    <div class="blog-main">
-      <section class="section-heading section-heading-inline">
-        <div>
-          <p class="section-kicker">Latest</p>
-          <h2>Recent Posts</h2>
-        </div>
-        <a class="section-link" href="{{ '/blog/' | relative_url }}">View all posts →</a>
-      </section>
-
-      {% include post-list.html limit=4 %}
-    </div>
-
-    <aside class="blog-side">
-      <section class="side-card">
-        <p class="side-title">About</p>
-        <div class="side-copy">
+  <div class="home-sections" id="content">
+    <section class="section-row">
+      <div class="section-label">
+        <h2>About</h2>
+      </div>
+      <div class="section-content">
+        <p class="section-kicker">R / Python / Linux</p>
+        <div class="section-prose">
           {{ content }}
         </div>
-      </section>
-
-      <section class="side-card">
-        <p class="side-title">Topic Index</p>
-        {% include category-index.html %}
-      </section>
-
-      <section class="side-card">
-        <p class="side-title">Tech Stack</p>
-        <div class="tag-cloud tag-cloud-soft">
+        <p>{{ site.profile.summary }}</p>
+        <p>
+          当前重点方向是 {{ site.profile.focus }}，持续维护项目是
+          <a href="{{ site.featured_project.url }}" target="_blank" rel="noreferrer">{{ site.featured_project.name }}</a>。
+        </p>
+        <div class="chip-list">
           {% for item in site.profile.tech_stack %}
             <span>{{ item }}</span>
           {% endfor %}
         </div>
-      </section>
+      </div>
+    </section>
 
-      <section class="side-card">
-        <p class="side-title">Explore</p>
-        <div class="utility-links">
-          <a href="{{ '/blog/' | relative_url }}">Blog</a>
-          <a href="{{ '/archive/' | relative_url }}">Archive</a>
-          <a href="{{ '/tags/' | relative_url }}">Tags</a>
-          <a href="{{ '/search/' | relative_url }}">Search</a>
-          <a href="{{ '/projects/' | relative_url }}">Projects</a>
-          <a href="{{ '/links/' | relative_url }}">Links</a>
-          <a href="{{ '/about/' | relative_url }}">About</a>
-          <a href="{{ site.links.github }}" target="_blank" rel="noreferrer">GitHub</a>
-          <a href="{{ site.links.orcid }}" target="_blank" rel="noreferrer">ORCID</a>
+    {% if site.posts.size > 0 %}
+      <section class="section-row">
+        <div class="section-label">
+          <h2>Posts</h2>
+        </div>
+        <div class="section-content">
+          <div class="section-bar">
+            <p>Recent notes, debugging logs, and workflow records.</p>
+            <a href="{{ '/blog/' | relative_url }}">More posts →</a>
+          </div>
+          {% include post-list.html limit=6 %}
         </div>
       </section>
-    </aside>
+    {% endif %}
+
+    <section class="section-row">
+      <div class="section-label">
+        <h2>Projects</h2>
+      </div>
+      <div class="section-content">
+        <div class="project-list project-list-home">
+          <article class="project-entry">
+            <h3><a href="{{ site.featured_project.url }}" target="_blank" rel="noreferrer">{{ site.featured_project.name }}</a></h3>
+            <p>{{ site.featured_project.description }}</p>
+            <p class="project-meta">R · Survival Machine Learning · Reproducible Workflow</p>
+          </article>
+          <article class="project-entry">
+            <h3><a href="{{ site.links.github }}" target="_blank" rel="noreferrer">GitHub Profile</a></h3>
+            <p>更多脚本、实验性分析流程和正在整理中的工具项目，会先放在 GitHub 上持续更新。</p>
+            <p class="project-meta">{{ site.author.github }}</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-row">
+      <div class="section-label">
+        <h2>Links</h2>
+      </div>
+      <div class="section-content">
+        <div class="link-list link-list-home">
+          <a href="{{ site.links.github }}" target="_blank" rel="noreferrer">
+            <strong>GitHub</strong>
+            <span>代码仓库、公开主页与项目入口</span>
+          </a>
+          <a href="{{ site.links.orcid }}" target="_blank" rel="noreferrer">
+            <strong>ORCID</strong>
+            <span>研究身份主页</span>
+          </a>
+          <a href="{{ '/archive/' | relative_url }}">
+            <strong>Archive</strong>
+            <span>按年份浏览全部文章与记录</span>
+          </a>
+          <a href="{{ '/tags/' | relative_url }}">
+            <strong>Tags</strong>
+            <span>按主题查找文章</span>
+          </a>
+          <a href="{{ '/search/' | relative_url }}">
+            <strong>Search</strong>
+            <span>搜索标题、摘要与正文关键词</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-row">
+      <div class="section-label">
+        <h2>Skills</h2>
+      </div>
+      <div class="section-content skill-groups">
+        <div class="skill-row">
+          <h3>Core</h3>
+          <div class="chip-list">
+            {% for item in site.profile.tech_stack %}
+              <span>{{ item }}</span>
+            {% endfor %}
+          </div>
+        </div>
+        <div class="skill-row">
+          <h3>Workflow</h3>
+          <div class="chip-list">
+            <span>Reproducible analysis</span>
+            <span>System setup</span>
+            <span>Debugging notes</span>
+            <span>Survival ML</span>
+          </div>
+        </div>
+      </div>
+    </section>
   </div>
 </section>
