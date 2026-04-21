@@ -18,6 +18,8 @@ document.addEventListener("DOMContentLoaded", () => {
       .replace(/\"/g, "&quot;")
       .replace(/'/g, "&#39;");
 
+  const isGlobalSearchOpen = () => siteHeader?.classList.contains("search-open");
+
   const loadPosts = async () => {
     if (!postsPromise) {
       postsPromise = fetch(searchIndexUrl)
@@ -74,7 +76,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const setPanelOpen = (open) => {
     if (!globalPanel || !searchToggle) return;
-    globalPanel.hidden = !open;
+    globalPanel.setAttribute("aria-hidden", String(!open));
     searchToggle.setAttribute("aria-expanded", String(open));
     siteHeader?.classList.toggle("search-open", open);
     if (open && globalInput) {
@@ -86,17 +88,17 @@ document.addEventListener("DOMContentLoaded", () => {
   if (searchToggle && globalPanel) {
     searchToggle.addEventListener("click", (event) => {
       event.preventDefault();
-      setPanelOpen(globalPanel.hidden);
+      setPanelOpen(!isGlobalSearchOpen());
     });
 
     document.addEventListener("click", (event) => {
-      if (globalPanel.hidden) return;
+      if (!isGlobalSearchOpen()) return;
       if (globalPanel.contains(event.target) || searchToggle.contains(event.target)) return;
       setPanelOpen(false);
     });
 
     document.addEventListener("keydown", (event) => {
-      if (event.key === "Escape" && !globalPanel.hidden) {
+      if (event.key === "Escape" && isGlobalSearchOpen()) {
         setPanelOpen(false);
       }
     });
@@ -189,7 +191,7 @@ document.addEventListener("DOMContentLoaded", () => {
     window.addEventListener(
       "scroll",
       () => {
-        if (!globalPanel.hidden) {
+        if (isGlobalSearchOpen()) {
           setPanelOpen(false);
         }
       },

@@ -13,27 +13,37 @@
     {% if reading_minutes < 1 %}
       {% assign reading_minutes = 1 %}
     {% endif %}
-    <article class="post-card{% if list_variant == 'home' %} post-card-home{% endif %}">
-      <a class="post-card-link{% if list_variant == 'home' %} post-card-link-home{% endif %}" href="{{ post.url | relative_url }}">
-        {% if list_variant == 'home' %}
+    {% if list_variant == 'home' %}
+      <article class="post-card post-card-home">
+        <div class="post-card-home-shell">
           <time class="post-card-date post-card-date-home" datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %-d, %Y" }}</time>
-          <div class="post-card-head post-card-head-home">
-            <h3>{{ post.title }}</h3>
-            <span class="post-card-arrow">→</span>
-          </div>
-          <p class="post-card-excerpt post-card-excerpt-home">{{ post.excerpt | strip_html | strip_newlines | truncate: 132 }}</p>
-          <div class="post-card-stats post-card-stats-home">
-            <span>{{ reading_minutes }} min read</span>
-            <span>中文</span>
-          </div>
-          <div class="post-card-meta post-card-meta-home">
+          <div class="post-card-main-home">
+            <a class="post-card-title-link-home" href="{{ post.url | relative_url }}">
+              <h3>{{ post.title }}</h3>
+            </a>
+            <p class="post-card-excerpt post-card-excerpt-home">{{ post.excerpt | strip_html | strip_newlines | truncate: 180 }}</p>
             {% if post.categories and post.categories != empty %}
-              {% for category in post.categories %}
-                <a href="{{ '/tags/' | relative_url }}#{{ category | slugify }}"><span>{{ category }}</span></a>
-              {% endfor %}
+              <div class="post-card-meta post-card-meta-home">
+                {% for category in post.categories %}
+                  <a href="{{ '/tags/' | relative_url }}#{{ category | slugify }}"><span>{{ category }}</span></a>
+                {% endfor %}
+              </div>
             {% endif %}
           </div>
-        {% else %}
+          <div class="post-card-side-home">
+            <a class="post-card-jump-home" href="{{ post.url | relative_url }}" aria-label="{{ post.title }}">
+              <span class="post-card-arrow">→</span>
+            </a>
+            <div class="post-card-stats post-card-stats-home">
+              <span>{{ reading_minutes }} min read</span>
+              <span>中文</span>
+            </div>
+          </div>
+        </div>
+      </article>
+    {% else %}
+      <article class="post-card">
+        <a class="post-card-link" href="{{ post.url | relative_url }}">
           <div class="post-card-main">
             <time class="post-card-date" datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %-d, %Y" }}</time>
             <div class="post-card-head">
@@ -53,8 +63,8 @@
               {% endif %}
             </div>
           </div>
-        {% endif %}
-      </a>
-    </article>
+        </a>
+      </article>
+    {% endif %}
   {% endfor %}
 </div>
