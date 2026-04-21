@@ -1,13 +1,16 @@
 :root {
-  --bg: #f6f1e8;
-  --surface: rgba(255, 252, 246, 0.82);
+  --bg: #f7f2ff;
+  --surface: rgba(255, 255, 255, 0.82);
   --surface-strong: #fffdfa;
-  --line: rgba(38, 57, 53, 0.14);
-  --ink: #172321;
-  --ink-muted: #5b6966;
-  --accent: #255b53;
-  --accent-soft: rgba(37, 91, 83, 0.08);
-  --shadow: 0 18px 48px rgba(20, 33, 31, 0.08);
+  --line: rgba(123, 142, 220, 0.18);
+  --ink: #4e5371;
+  --ink-muted: #6e7399;
+  --accent: #7b8edc;
+  --accent-soft: rgba(156, 183, 236, 0.16);
+  --accent-strong: #9cb7ec;
+  --accent-pink: #f0a9c4;
+  --accent-lavender: #c7b4e8;
+  --shadow: 0 18px 48px rgba(123, 142, 220, 0.12);
   --display: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", "Songti SC", "SimSun", serif;
   --sans: "Aptos", "Segoe UI Variable", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
   --content-width: min(1120px, calc(100vw - 40px));
@@ -26,9 +29,10 @@ body {
   margin: 0;
   color: var(--ink);
   background:
-    radial-gradient(circle at top left, rgba(198, 221, 216, 0.9), transparent 28%),
-    radial-gradient(circle at 88% 10%, rgba(234, 220, 196, 0.92), transparent 24%),
-    linear-gradient(180deg, #f9f6f0 0%, var(--bg) 100%);
+    radial-gradient(circle at top left, rgba(156, 183, 236, 0.34), transparent 28%),
+    radial-gradient(circle at 88% 10%, rgba(240, 169, 196, 0.26), transparent 24%),
+    radial-gradient(circle at 58% 100%, rgba(199, 180, 232, 0.24), transparent 22%),
+    linear-gradient(180deg, #fbf8ff 0%, var(--bg) 100%);
   font-family: var(--sans);
   line-height: 1.7;
 }
@@ -49,7 +53,7 @@ img {
 .page-frame {
   position: fixed;
   inset: 18px;
-  border: 1px solid rgba(37, 91, 83, 0.08);
+  border: 1px solid rgba(123, 142, 220, 0.12);
   border-radius: 28px;
   pointer-events: none;
 }
@@ -84,7 +88,7 @@ img {
   padding: 16px 20px;
   border: 1px solid var(--line);
   border-radius: 999px;
-  background: rgba(251, 248, 243, 0.78);
+  background: rgba(251, 248, 255, 0.82);
   backdrop-filter: blur(18px);
 }
 
@@ -280,14 +284,18 @@ img {
   border-color: transparent;
 }
 
+.button-secondary {
+  background: rgba(240, 194, 215, 0.18);
+}
+
 .profile-meta {
   display: grid;
   gap: 18px;
-  background: rgba(252, 249, 244, 0.76);
+  background: rgba(250, 246, 255, 0.8);
 }
 
 .meta-block + .meta-block {
-  border-top: 1px solid rgba(37, 91, 83, 0.1);
+  border-top: 1px solid rgba(123, 142, 220, 0.14);
   padding-top: 18px;
 }
 
@@ -312,10 +320,30 @@ img {
   align-items: center;
   min-height: 34px;
   padding: 0 12px;
-  border: 1px solid rgba(37, 91, 83, 0.12);
+  border: 1px solid rgba(123, 142, 220, 0.12);
   border-radius: 999px;
   background: var(--accent-soft);
   font-size: 0.92rem;
+}
+
+.stack-list span:nth-child(1) {
+  background: rgba(126, 169, 240, 0.18);
+}
+
+.stack-list span:nth-child(2) {
+  background: rgba(156, 183, 236, 0.18);
+}
+
+.stack-list span:nth-child(3) {
+  background: rgba(168, 180, 245, 0.18);
+}
+
+.stack-list span:nth-child(4) {
+  background: rgba(199, 180, 232, 0.2);
+}
+
+.stack-list span:nth-child(5) {
+  background: rgba(240, 194, 215, 0.2);
 }
 
 .feature-link {
@@ -372,7 +400,7 @@ img {
   grid-template-columns: 124px minmax(0, 1fr);
   gap: 20px;
   border-radius: 24px;
-  background: rgba(255, 252, 246, 0.8);
+  background: rgba(255, 255, 255, 0.78);
 }
 
 .post-row-date {
@@ -417,7 +445,7 @@ img {
 }
 
 .info-card {
-  background: rgba(255, 252, 247, 0.72);
+  background: rgba(255, 255, 255, 0.76);
 }
 
 .aside-links {
@@ -438,7 +466,7 @@ img {
 
 .feature-card {
   padding: 28px 30px;
-  background: rgba(252, 249, 244, 0.82);
+  background: rgba(255, 255, 255, 0.8);
 }
 
 .feature-card h2 {
@@ -561,7 +589,7 @@ img {
 .post-body code {
   padding: 0.15em 0.4em;
   border-radius: 8px;
-  background: rgba(37, 91, 83, 0.08);
+  background: rgba(156, 183, 236, 0.18);
   font-size: 0.92em;
 }
 
@@ -581,7 +609,7 @@ img {
 
 .post-body blockquote {
   padding: 0 0 0 18px;
-  border-left: 3px solid rgba(37, 91, 83, 0.32);
+  border-left: 3px solid rgba(123, 142, 220, 0.32);
   color: var(--ink-muted);
 }
 
@@ -591,16 +619,16 @@ img {
   gap: 14px;
   margin-top: 42px;
   padding-top: 18px;
-  border-top: 1px solid rgba(37, 91, 83, 0.12);
+  border-top: 1px solid rgba(123, 142, 220, 0.12);
 }
 
 .post-nav-card {
   display: grid;
   gap: 4px;
   padding: 18px;
-  border: 1px solid rgba(37, 91, 83, 0.12);
+  border: 1px solid rgba(123, 142, 220, 0.12);
   border-radius: 18px;
-  background: rgba(255, 252, 246, 0.74);
+  background: rgba(255, 255, 255, 0.78);
 }
 
 .post-nav-card span {
