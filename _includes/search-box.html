@@ -1,18 +1,33 @@
-<form class="site-search-box" action="{{ '/search/' | relative_url }}" method="get">
-  <label class="search-label" for="{{ include.id | default: 'site-search-query' }}">
+{% assign search_id = include.id | default: 'site-search-query' %}
+<form
+  class="site-search-box{% if include.class %} {{ include.class }}{% endif %}"
+  action="{{ '/search/' | relative_url }}"
+  method="get"
+  {% if include.live %}data-search-root="true"{% endif %}
+  {% if include.limit %}data-search-limit="{{ include.limit }}"{% endif %}
+  {% if include.sync_url %}data-search-sync-url="true"{% endif %}>
+  <label class="search-label" for="{{ search_id }}">
     {{ include.label | default: '站内搜索' }}
   </label>
   <div class="search-inline">
     <input
-      id="{{ include.id | default: 'site-search-query' }}"
+      id="{{ search_id }}"
       class="search-input"
       type="search"
       name="q"
       placeholder="{{ include.placeholder | default: '输入关键词搜索文章、标签和正文' }}"
       autocomplete="off">
-    <button class="search-submit" type="submit">搜索</button>
+    <button class="search-submit" type="submit">{{ include.button_label | default: '搜索' }}</button>
   </div>
   {% if include.hint %}
     <p class="search-hint">{{ include.hint }}</p>
+  {% endif %}
+  {% if include.live %}
+    <div class="search-results{% if include.results_compact %} search-results-compact{% endif %}" data-search-results></div>
+    {% unless include.more_link == false or include.more_link == 'false' %}
+      <a class="search-more-link" href="{{ '/search/' | relative_url }}" data-search-more hidden>
+        {{ include.more_label | default: '打开完整搜索页 →' }}
+      </a>
+    {% endunless %}
   {% endif %}
 </form>

@@ -1,5 +1,5 @@
-<header class="site-header">
-  <div class="nav-shell">
+<header class="site-header" data-site-header>
+  <div class="nav-shell" data-nav-shell>
     <a class="brandmark" href="{{ '/' | relative_url }}">
       <span class="brandmark-label">{{ site.author.name }}</span>
       <span class="brandmark-subtle">{{ site.profile.handle }}</span>
@@ -10,11 +10,30 @@
       <a class="{% if page.url == '/projects/' %}active{% endif %}" href="{{ '/projects/' | relative_url }}">Projects</a>
       <a class="{% if page.url == '/links/' %}active{% endif %}" href="{{ '/links/' | relative_url }}">Links</a>
       <a class="{% if page.url == '/about/' %}active{% endif %}" href="{{ '/about/' | relative_url }}">About</a>
-      <a class="site-nav-icon {% if page.url == '/search/' %}active{% endif %}" href="{{ '/search/' | relative_url }}" aria-label="Search">
+      <a
+        class="site-nav-icon {% if page.url == '/search/' %}active{% endif %}"
+        href="{{ '/search/' | relative_url }}"
+        aria-label="Search"
+        aria-expanded="false"
+        aria-controls="site-search-panel"
+        data-search-toggle>
         <svg viewBox="0 0 24 24" aria-hidden="true">
           <path d="M10 4a6 6 0 1 0 3.9 10.56l4.77 4.77a1 1 0 0 0 1.41-1.41l-4.77-4.77A6 6 0 0 0 10 4Zm0 2a4 4 0 1 1 0 8a4 4 0 0 1 0-8Z"></path>
         </svg>
       </a>
     </nav>
+  </div>
+
+  <div class="site-search-panel" id="site-search-panel" data-global-search-panel hidden>
+    {% include search-box.html
+      id="global-search-input"
+      class="site-search-box-global"
+      label="Search the site"
+      placeholder="例如：windows、jekyll、python"
+      hint="顶栏搜索会直接在当前页展开结果，不再跳到单独页面。"
+      live=true
+      limit=5
+      results_compact=true
+      more_label="打开完整搜索页 →" %}
   </div>
 </header>
