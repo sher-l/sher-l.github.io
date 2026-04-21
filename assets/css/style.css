@@ -82,7 +82,7 @@ img {
   gap: 24px;
   width: var(--content-width);
   margin: 0 auto;
-  padding: 22px 0 16px;
+  padding: 18px 0 12px;
   border: 1px solid transparent;
   border-radius: 28px;
   background: transparent;
@@ -171,9 +171,9 @@ img {
 
 .site-header.is-floating .nav-shell {
   width: min(960px, calc(100vw - 32px));
-  padding: 14px 22px;
+  padding: 10px 20px;
   border: 1px solid var(--line-strong);
-  border-radius: 24px;
+  border-radius: 22px;
   background: rgba(255, 255, 255, 0.92);
   box-shadow: 0 18px 34px rgba(110, 115, 153, 0.12);
   backdrop-filter: blur(18px);

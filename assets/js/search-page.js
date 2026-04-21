@@ -108,6 +108,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const moreLink = root.querySelector("[data-search-more]");
     const limit = Number.parseInt(root.dataset.searchLimit || "0", 10);
     const syncUrl = root.dataset.searchSyncUrl === "true";
+    const isGlobalSearch = root.closest("[data-global-search-panel]") !== null;
     const initialQuery = syncUrl ? (new URLSearchParams(window.location.search).get("q") || "").trim() : "";
 
     if (!input || !results) return;
@@ -169,9 +170,12 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     };
 
-    root.addEventListener("submit", (event) => {
+    root.addEventListener("submit", async (event) => {
       event.preventDefault();
-      runSearch();
+      await runSearch();
+      if (isGlobalSearch && input.value.trim()) {
+        setPanelOpen(false);
+      }
     });
 
     input.addEventListener("input", runSearch);
