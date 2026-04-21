@@ -527,7 +527,10 @@ img {
 }
 
 .collection-head,
-.page-head,
+.page-head {
+  margin-top: 22px;
+}
+
 .article-header {
   margin-top: 30px;
 }
@@ -666,6 +669,11 @@ img {
 
 .back-link::before {
   content: "←";
+}
+
+.collection-shell > .back-link,
+.page-shell > .back-link {
+  margin-top: 30px;
 }
 
 .page-content {
