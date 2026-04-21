@@ -173,9 +173,6 @@ document.addEventListener("DOMContentLoaded", () => {
     root.addEventListener("submit", async (event) => {
       event.preventDefault();
       await runSearch();
-      if (isGlobalSearch && input.value.trim()) {
-        setPanelOpen(false);
-      }
     });
 
     input.addEventListener("input", runSearch);
@@ -187,4 +184,16 @@ document.addEventListener("DOMContentLoaded", () => {
       renderEmpty();
     }
   });
+
+  if (searchToggle && globalPanel) {
+    window.addEventListener(
+      "scroll",
+      () => {
+        if (!globalPanel.hidden) {
+          setPanelOpen(false);
+        }
+      },
+      { passive: true }
+    );
+  }
 });
