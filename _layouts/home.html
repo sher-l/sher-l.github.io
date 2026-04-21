@@ -48,11 +48,10 @@ layout: default
           <h2>Posts</h2>
         </div>
         <div class="section-content">
-          <div class="section-bar">
-            <p>Recent notes, debugging logs, and workflow records.</p>
+          {% include post-list.html limit=9 variant="home" %}
+          <p class="home-posts-more">
             <a href="{{ '/blog/' | relative_url }}">More posts →</a>
-          </div>
-          {% include post-list.html limit=6 variant="home" %}
+          </p>
         </div>
       </section>
     {% endif %}
