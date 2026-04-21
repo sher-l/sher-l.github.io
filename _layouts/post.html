@@ -14,29 +14,29 @@ layout: default
 
   <div class="reading-grid">
     <div class="reading-main">
-      <div class="article-panel">
-        <header class="article-header" id="content-header">
-          <div class="article-meta-line">
-            <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%b %-d, %Y" }}</time>
-            <span>{{ reading_minutes }} min read</span>
-            <span>中文</span>
-            {% if page.categories and page.categories != empty %}
-              <span>
-                {% for category in page.categories %}
-                  <a href="{{ '/tags/' | relative_url }}#{{ category | slugify }}"># {{ category }}</a>{% unless forloop.last %} / {% endunless %}
-                {% endfor %}
-              </span>
-            {% endif %}
-          </div>
-          <h1>{{ page.title }}</h1>
-          {% if article_deck != blank %}
-            <p class="article-deck">{{ article_deck }}</p>
+      <header class="article-header" id="content-header">
+        <div class="article-meta-line">
+          <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%b %-d, %Y" }}</time>
+          <span>{{ reading_minutes }} min read</span>
+          <span>中文</span>
+          {% if page.categories and page.categories != empty %}
+            <span>
+              {% for category in page.categories %}
+                <a href="{{ '/tags/' | relative_url }}#{{ category | slugify }}"># {{ category }}</a>{% unless forloop.last %} / {% endunless %}
+              {% endfor %}
+            </span>
           {% endif %}
-        </header>
-
-        <div class="post-body" id="content">
-          {{ content }}
         </div>
+        <h1>{{ page.title }}</h1>
+        {% if article_deck != blank %}
+          <p class="article-deck">{{ article_deck }}</p>
+        {% endif %}
+      </header>
+
+      <div class="article-divider" aria-hidden="true"></div>
+
+      <div class="post-body" id="content">
+        {{ content }}
       </div>
 
       <footer class="post-footer-nav">
