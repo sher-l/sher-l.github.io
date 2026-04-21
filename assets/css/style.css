@@ -177,7 +177,8 @@ img {
   transform: translateX(-50%) scale(1);
 }
 
-.site-header.is-floating .nav-shell {
+.site-header.is-floating .nav-shell,
+.site-header.search-open .nav-shell {
   width: min(960px, calc(100vw - 32px));
   padding: 7px 18px;
   border: 1px solid var(--line-strong);
@@ -187,23 +188,28 @@ img {
   backdrop-filter: blur(16px);
 }
 
-.site-header.is-floating .brandmark-label {
+.site-header.is-floating .brandmark-label,
+.site-header.search-open .brandmark-label {
   font-size: 1.55rem;
 }
 
-.site-header.is-floating .brandmark-subtle {
+.site-header.is-floating .brandmark-subtle,
+.site-header.search-open .brandmark-subtle {
   font-size: 0.72rem;
 }
 
-.site-header.is-floating .site-nav {
+.site-header.is-floating .site-nav,
+.site-header.search-open .site-nav {
   gap: 20px;
 }
 
-.site-header.is-floating .site-nav a {
+.site-header.is-floating .site-nav a,
+.site-header.search-open .site-nav a {
   font-size: 0.98rem;
 }
 
-.site-header.is-floating .site-nav-icon {
+.site-header.is-floating .site-nav-icon,
+.site-header.search-open .site-nav-icon {
   width: 32px;
   height: 32px;
   border-radius: 9px;
@@ -1317,6 +1323,7 @@ img {
 
   .nav-shell,
   .site-header.is-floating .nav-shell,
+  .site-header.search-open .nav-shell,
   .site-search-panel {
     width: calc(100vw - 20px);
   }
