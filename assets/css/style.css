@@ -86,6 +86,7 @@ img {
   border: 1px solid transparent;
   border-radius: 28px;
   background: transparent;
+  transform-origin: center top;
   transition:
     transform 0.28s ease,
     opacity 0.28s ease,
@@ -160,6 +161,7 @@ img {
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
+  transform-origin: center top;
   transform: translate(-50%, -12px) scale(0.985);
   transition:
     transform 0.28s ease,
@@ -222,11 +224,11 @@ img {
 }
 
 .site-header.is-floating.is-hidden .nav-shell {
-  transform: translateY(-140%);
+  transform: scale(0.88, 0.82);
 }
 
 .site-header.is-floating.is-hidden .site-search-panel {
-  transform: translate(-50%, -26px);
+  transform: translateX(-50%) scale(0.92, 0.9);
 }
 
 .site-header.search-open.is-floating .nav-shell,
@@ -236,7 +238,7 @@ img {
 }
 
 .site-header.search-open.is-floating .nav-shell {
-  transform: translateY(0);
+  transform: scale(1);
 }
 
 .site-header.search-open.is-floating .site-search-panel {
