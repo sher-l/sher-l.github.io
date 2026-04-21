@@ -4,6 +4,9 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   if (!input || !results) return;
 
+  const params = new URLSearchParams(window.location.search);
+  const initialQuery = (params.get("q") || "").trim();
+
   let posts = [];
   try {
     const response = await fetch("/search.json");
@@ -41,12 +44,26 @@ document.addEventListener("DOMContentLoaded", async () => {
       .join("");
   };
 
+  const updateUrl = (rawQuery) => {
+    const nextUrl = new URL(window.location.href);
+    if (rawQuery) {
+      nextUrl.searchParams.set("q", rawQuery);
+    } else {
+      nextUrl.searchParams.delete("q");
+    }
+    window.history.replaceState({}, "", nextUrl);
+  };
+
   const runSearch = () => {
-    const query = input.value.trim().toLowerCase();
+    const rawQuery = input.value.trim();
+    const query = rawQuery.toLowerCase();
     if (!query) {
+      updateUrl("");
       render([], "");
       return;
     }
+
+    updateUrl(rawQuery);
 
     const filtered = posts.filter((post) => {
       const haystack = [
@@ -65,5 +82,12 @@ document.addEventListener("DOMContentLoaded", async () => {
   };
 
   input.addEventListener("input", runSearch);
+
+  if (initialQuery) {
+    input.value = initialQuery;
+    runSearch();
+    return;
+  }
+
   render([], "");
 });

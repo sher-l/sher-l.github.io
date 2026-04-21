@@ -1,9 +1,9 @@
 ---
 layout: blog
 title: Archive
-description: 兼容旧入口的文章归档页。
+description: 按年份浏览全部文章与记录。
 permalink: /archive/
 eyebrow: Archive
 ---
 
-{% include post-list.html %}
+{% include archive-list.html %}

@@ -13,6 +13,31 @@ layout: default
     </div>
   </div>
 
+  <section class="feature-strip">
+    <div class="feature-strip-search">
+      {% include search-box.html
+        id="home-search-input"
+        label="站内搜索"
+        placeholder="例如：windows、jekyll、python"
+        hint="支持匹配文章标题、摘要、正文和标签。" %}
+    </div>
+
+    <div class="feature-strip-links">
+      <a href="{{ '/blog/' | relative_url }}">
+        <strong>Blog</strong>
+        <span>查看全部文章列表</span>
+      </a>
+      <a href="{{ '/tags/' | relative_url }}">
+        <strong>Tags</strong>
+        <span>按主题浏览内容</span>
+      </a>
+      <a href="{{ '/archive/' | relative_url }}">
+        <strong>Archive</strong>
+        <span>按时间归档查看</span>
+      </a>
+    </div>
+  </section>
+
   <div class="blog-grid">
     <div class="blog-main">
       <section class="section-heading section-heading-inline">
@@ -35,6 +60,11 @@ layout: default
       </section>
 
       <section class="side-card">
+        <p class="side-title">Topic Index</p>
+        {% include category-index.html %}
+      </section>
+
+      <section class="side-card">
         <p class="side-title">Tech Stack</p>
         <div class="tag-cloud tag-cloud-soft">
           {% for item in site.profile.tech_stack %}
@@ -44,9 +74,12 @@ layout: default
       </section>
 
       <section class="side-card">
-        <p class="side-title">Links</p>
-        <div class="side-links">
+        <p class="side-title">Explore</p>
+        <div class="utility-links">
           <a href="{{ '/blog/' | relative_url }}">Blog</a>
+          <a href="{{ '/archive/' | relative_url }}">Archive</a>
+          <a href="{{ '/tags/' | relative_url }}">Tags</a>
+          <a href="{{ '/search/' | relative_url }}">Search</a>
           <a href="{{ '/projects/' | relative_url }}">Projects</a>
           <a href="{{ '/links/' | relative_url }}">Links</a>
           <a href="{{ '/about/' | relative_url }}">About</a>

@@ -1,0 +1,9 @@
+{% assign sorted_categories = site.categories | sort %}
+<div class="category-index">
+  {% for category in sorted_categories %}
+    <a class="category-index-link" href="{{ '/tags/' | relative_url }}#{{ category[0] | slugify }}">
+      <span>{{ category[0] }}</span>
+      <strong>{{ category[1].size }}</strong>
+    </a>
+  {% endfor %}
+</div>
