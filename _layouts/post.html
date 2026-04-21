@@ -3,31 +3,33 @@ layout: default
 ---
 
 <article class="post-shell">
-  <header class="post-hero">
-    <a class="back-link" href="{{ '/archive/' | relative_url }}">← 返回归档</a>
-    <p class="post-date">{{ page.date | date: "%Y.%m.%d" }}</p>
+  <header class="post-head">
+    <p class="page-eyebrow">Post</p>
     <h1>{{ page.title }}</h1>
-    {% if page.categories and page.categories != empty %}
-      <p class="post-taxonomy">{{ page.categories | join: " · " }}</p>
-    {% endif %}
+    <div class="post-meta">
+      <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%Y.%m.%d" }}</time>
+      {% if page.categories and page.categories != empty %}
+        <span>{{ page.categories | join: " · " }}</span>
+      {% endif %}
+    </div>
   </header>
 
   <div class="post-body">
     {{ content }}
-
-    <footer class="post-footer-nav">
-      {% if page.previous %}
-        <a class="post-nav-card" href="{{ page.previous.url | relative_url }}">
-          <span>上一篇</span>
-          <strong>{{ page.previous.title }}</strong>
-        </a>
-      {% endif %}
-      {% if page.next %}
-        <a class="post-nav-card" href="{{ page.next.url | relative_url }}">
-          <span>下一篇</span>
-          <strong>{{ page.next.title }}</strong>
-        </a>
-      {% endif %}
-    </footer>
   </div>
+
+  <footer class="post-footer-nav">
+    {% if page.previous %}
+      <a class="post-nav-card" href="{{ page.previous.url | relative_url }}">
+        <span>上一篇</span>
+        <strong>{{ page.previous.title }}</strong>
+      </a>
+    {% endif %}
+    {% if page.next %}
+      <a class="post-nav-card" href="{{ page.next.url | relative_url }}">
+        <span>下一篇</span>
+        <strong>{{ page.next.title }}</strong>
+      </a>
+    {% endif %}
+  </footer>
 </article>

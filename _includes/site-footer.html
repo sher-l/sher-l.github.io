@@ -1,14 +1,13 @@
 <footer class="site-footer">
   <div class="footer-shell">
-    <div>
-      <p class="footer-title">{{ site.title }}</p>
-      <p class="footer-copy">{{ site.description }}</p>
-    </div>
+    <p class="footer-copy">{{ site.description }}</p>
     <div class="footer-meta">
-      <a href="{{ '/archive/' | relative_url }}">归档</a>
+      <a href="{{ '/blog/' | relative_url }}">Blog</a>
+      <a href="{{ '/projects/' | relative_url }}">Projects</a>
+      <a href="{{ '/links/' | relative_url }}">Links</a>
+      <a href="{{ '/about/' | relative_url }}">About</a>
       <a href="{{ site.links.github }}" target="_blank" rel="noreferrer">GitHub</a>
       <a href="{{ site.links.orcid }}" target="_blank" rel="noreferrer">ORCID</a>
-      <span>© {{ site.time | date: "%Y" }}</span>
     </div>
   </div>
 </footer>

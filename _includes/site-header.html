@@ -1,16 +1,16 @@
 <header class="site-header">
   <div class="nav-shell">
     <a class="brandmark" href="{{ '/' | relative_url }}">
-      <span class="brandmark-label">{{ site.title }}</span>
-      <span class="brandmark-subtle">{{ site.tagline }}</span>
+      <span class="brandmark-label">IKL</span>
+      <span class="brandmark-subtle">{{ site.author.name }}</span>
     </a>
 
     <nav class="site-nav" aria-label="Primary">
-      <a href="{{ '/' | relative_url }}#posts">文章</a>
-      <a href="{{ '/' | relative_url }}#projects">项目</a>
-      <a href="{{ '/' | relative_url }}#about">关于</a>
-      <a href="{{ '/archive/' | relative_url }}">归档</a>
-      <a href="{{ site.links.github }}" target="_blank" rel="noreferrer">GitHub</a>
+      <a class="{% if page.url == '/' %}active{% endif %}" href="{{ '/' | relative_url }}">Home</a>
+      <a class="{% if page.url == '/blog/' or page.url == '/archive/' or page.layout == 'post' %}active{% endif %}" href="{{ '/blog/' | relative_url }}">Blog</a>
+      <a class="{% if page.url == '/projects/' %}active{% endif %}" href="{{ '/projects/' | relative_url }}">Projects</a>
+      <a class="{% if page.url == '/links/' %}active{% endif %}" href="{{ '/links/' | relative_url }}">Links</a>
+      <a class="{% if page.url == '/about/' %}active{% endif %}" href="{{ '/about/' | relative_url }}">About</a>
     </nav>
   </div>
 </header>

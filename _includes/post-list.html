@@ -1,0 +1,22 @@
+<div class="post-stream">
+  {% if include.limit %}
+    {% assign list_limit = include.limit %}
+  {% else %}
+    {% assign list_limit = site.posts.size %}
+  {% endif %}
+
+  {% for post in site.posts limit: list_limit %}
+    <article class="post-row">
+      <div class="post-row-date-wrap">
+        <time class="post-row-date" datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%Y.%m.%d" }}</time>
+        {% if post.categories and post.categories != empty %}
+          <p class="post-row-tags">{{ post.categories | join: " · " }}</p>
+        {% endif %}
+      </div>
+      <div class="post-row-body">
+        <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+        <p>{{ post.excerpt | strip_html | strip_newlines | truncate: 120 }}</p>
+      </div>
+    </article>
+  {% endfor %}
+</div>

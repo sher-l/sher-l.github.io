@@ -2,90 +2,70 @@
 layout: default
 ---
 
-<section class="home-intro">
-  <p class="hero-kicker">IKL notebook</p>
-  <h1>{{ site.author.name }} <span>{{ site.profile.handle }}</span></h1>
-  <p class="profile-summary">{{ site.profile.summary }}</p>
-  <p class="hero-intro">{{ site.description }}</p>
+<section class="home-shell">
+  <header class="home-lead">
+    <p class="page-eyebrow">IKL Notebook</p>
+    <h1>生信分析、系统配置与工作流笔记</h1>
+    <p class="home-summary">{{ site.description }}</p>
+  </header>
 
-  <div class="home-links">
-    <a href="{{ '/archive/' | relative_url }}">归档</a>
-    <a href="{{ site.links.github }}" target="_blank" rel="noreferrer">GitHub</a>
-    <a href="{{ site.links.orcid }}" target="_blank" rel="noreferrer">ORCID</a>
+  <div class="home-columns">
+    <div class="home-main">
+      <section class="section-block">
+        <div class="section-heading">
+          <p class="section-kicker">Recent Posts</p>
+          <h2>最近文章</h2>
+          <p>以问题为单位记录，尽量让每篇文章都可检索、可复用、可回看。</p>
+        </div>
+        {% include post-list.html limit=6 %}
+      </section>
+
+      <section class="section-block section-compact">
+        <p class="section-kicker">Project</p>
+        <h2><a class="feature-link" href="{{ site.featured_project.url }}" target="_blank" rel="noreferrer">{{ site.featured_project.name }}</a></h2>
+        <p>{{ site.featured_project.description }}</p>
+      </section>
+    </div>
+
+    <aside class="home-side">
+      <section class="side-section">
+        <p class="section-kicker">About</p>
+        <div class="side-copy">
+          {{ content }}
+        </div>
+      </section>
+
+      <section class="side-section">
+        <p class="section-kicker">Profile</p>
+        <h3>{{ site.author.name }} <span>{{ site.profile.handle }}</span></h3>
+        <p>{{ site.profile.summary }}</p>
+      </section>
+
+      <section class="side-section">
+        <p class="section-kicker">Current Focus</p>
+        <p>{{ site.profile.focus }}</p>
+      </section>
+
+      <section class="side-section">
+        <p class="section-kicker">Tech Stack</p>
+        <div class="chip-list">
+          {% for item in site.profile.tech_stack %}
+            <span>{{ item }}</span>
+          {% endfor %}
+        </div>
+      </section>
+
+      <section class="side-section">
+        <p class="section-kicker">Links</p>
+        <div class="link-list">
+          <a href="{{ '/blog/' | relative_url }}">Blog</a>
+          <a href="{{ '/projects/' | relative_url }}">Projects</a>
+          <a href="{{ '/links/' | relative_url }}">Links</a>
+          <a href="{{ '/about/' | relative_url }}">About</a>
+          <a href="{{ site.links.github }}" target="_blank" rel="noreferrer">GitHub</a>
+          <a href="{{ site.links.orcid }}" target="_blank" rel="noreferrer">ORCID</a>
+        </div>
+      </section>
+    </aside>
   </div>
-</section>
-
-<section class="content-grid">
-  <div class="content-primary" id="posts">
-    <div class="section-heading">
-      <p class="section-kicker">Posts</p>
-      <h2>最近文章</h2>
-      <p>以问题为单位记录，尽量让每篇文章都可检索、可复用、可回看。</p>
-    </div>
-
-    <div class="post-stream">
-      {% for post in site.posts limit: 6 %}
-        <article class="post-row">
-          <time class="post-row-date" datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%Y.%m.%d" }}</time>
-          <div class="post-row-body">
-            <div class="post-card-meta">
-              {% if post.categories and post.categories != empty %}
-                <span>{{ post.categories | join: " · " }}</span>
-              {% else %}
-                <span>note</span>
-              {% endif %}
-            </div>
-            <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
-            <p>{{ post.excerpt | strip_html | strip_newlines | truncate: 104 }}</p>
-          </div>
-        </article>
-      {% endfor %}
-    </div>
-
-    <section class="home-project" id="projects">
-      <p class="focus-kicker">Featured project</p>
-      <h2><a class="feature-link" href="{{ site.featured_project.url }}" target="_blank" rel="noreferrer">{{ site.featured_project.name }}</a></h2>
-      <p>{{ site.featured_project.description }}</p>
-    </section>
-  </div>
-
-  <aside class="content-aside">
-    <div class="section-heading section-heading-compact" id="about">
-      <p class="section-kicker">About</p>
-      <h2>关于这个站</h2>
-    </div>
-
-    <div class="sidebar-block sidebar-copy">
-      {{ content }}
-    </div>
-
-    <div class="sidebar-block">
-      <p class="panel-eyebrow">About me</p>
-      <p>{{ site.profile.summary }}</p>
-    </div>
-
-    <div class="sidebar-block">
-      <p class="panel-eyebrow">Current focus</p>
-      <p>{{ site.profile.focus }}</p>
-    </div>
-
-    <div class="sidebar-block">
-      <p class="panel-eyebrow">Tech stack</p>
-      <div class="stack-list">
-        {% for item in site.profile.tech_stack %}
-          <span>{{ item }}</span>
-        {% endfor %}
-      </div>
-    </div>
-
-    <div class="sidebar-block">
-      <p class="panel-eyebrow">Quick links</p>
-      <div class="aside-links">
-        <a href="{{ site.links.github }}" target="_blank" rel="noreferrer">GitHub</a>
-        <a href="{{ site.links.orcid }}" target="_blank" rel="noreferrer">ORCID</a>
-        <a href="{{ site.featured_project.url }}" target="_blank" rel="noreferrer">{{ site.featured_project.name }}</a>
-        <a href="{{ '/archive/' | relative_url }}">完整归档</a>
-      </div>
-    </div>
-  </aside>
 </section>
