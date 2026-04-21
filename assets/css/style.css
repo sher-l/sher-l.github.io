@@ -14,6 +14,9 @@
   --sans: "Satoshi", "Aptos", "Segoe UI Variable", "PingFang SC", "Microsoft YaHei", sans-serif;
   --content-width: min(1120px, calc(100vw - 48px));
   --reading-width: min(1180px, calc(100vw - 48px));
+  --home-measure: 820px;
+  --hero-measure: 52rem;
+  --footer-copy-measure: 44rem;
 }
 
 * {
@@ -319,7 +322,7 @@ img {
 }
 
 .home-hero-tagline {
-  max-width: 40rem;
+  max-width: var(--hero-measure);
   margin: 0;
   font-size: 1rem;
   line-height: 1.8;
@@ -415,7 +418,7 @@ img {
 .home-sections > .section-row .home-posts-more,
 .home-sections > .section-row .skill-groups {
   width: 100%;
-  max-width: 760px;
+  max-width: var(--home-measure);
 }
 
 .section-bar {
@@ -919,7 +922,7 @@ img {
 
 .post-card-list-home {
   width: 100%;
-  max-width: 760px;
+  max-width: var(--home-measure);
   gap: 10px;
   border-top: 0;
 }
@@ -1004,7 +1007,7 @@ img {
   display: flex;
   justify-content: flex-end;
   width: 100%;
-  max-width: 760px;
+  max-width: var(--home-measure);
   margin: 4px 0 0;
 }
 
@@ -1307,7 +1310,7 @@ img {
 }
 
 .footer-copy {
-  max-width: 34rem;
+  max-width: var(--footer-copy-measure);
   margin: 0;
 }
 
