@@ -722,7 +722,7 @@ img {
 }
 
 .back-link::before {
-  content: "←";
+  content: "‹";
 }
 
 .collection-shell > .back-link,

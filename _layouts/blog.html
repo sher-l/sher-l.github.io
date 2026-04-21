@@ -13,7 +13,7 @@ layout: default
     <section class="collection-main" id="content">
       <div class="collection-summary">
         <span>Showing {{ site.posts | size }} posts</span>
-        <a href="{{ '/archive/' | relative_url }}">View all posts by years &rarr;</a>
+        <a href="{{ '/archive/' | relative_url }}">View all posts by years ›</a>
       </div>
       {{ content }}
     </section>
@@ -22,7 +22,7 @@ layout: default
       <section class="blog-side-block">
         <h2>Tags</h2>
         {% include tag-cloud.html %}
-        <a class="side-more" href="{{ '/tags/' | relative_url }}">View all &rarr;</a>
+        <a class="side-more" href="{{ '/tags/' | relative_url }}">View all ›</a>
       </section>
     </aside>
   </div>
