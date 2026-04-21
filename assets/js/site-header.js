@@ -20,18 +20,25 @@ document.addEventListener("DOMContentLoaded", () => {
   if (!header) return;
 
   let lastScrollY = window.scrollY;
+  let isFloating = false;
   let ticking = false;
-  const floatThreshold = 140;
+  const floatEnterThreshold = 160;
+  const floatExitThreshold = 96;
   const motionThreshold = 18;
 
   const applyHeaderState = () => {
     const currentScrollY = window.scrollY;
-    const shouldFloat = currentScrollY > floatThreshold;
     const searchOpen = header.classList.contains("search-open");
 
-    header.classList.toggle("is-floating", shouldFloat);
+    if (!isFloating && currentScrollY >= floatEnterThreshold) {
+      isFloating = true;
+    } else if (isFloating && currentScrollY <= floatExitThreshold) {
+      isFloating = false;
+    }
 
-    if (!shouldFloat || searchOpen) {
+    header.classList.toggle("is-floating", isFloating);
+
+    if (!isFloating || searchOpen) {
       header.classList.remove("is-hidden");
     } else if (currentScrollY > lastScrollY + motionThreshold) {
       header.classList.add("is-hidden");
@@ -52,6 +59,10 @@ document.addEventListener("DOMContentLoaded", () => {
     },
     { passive: true }
   );
+
+  if (window.scrollY >= floatEnterThreshold) {
+    isFloating = true;
+  }
 
   applyHeaderState();
 });
