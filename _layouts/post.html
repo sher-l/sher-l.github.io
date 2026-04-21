@@ -1,0 +1,18 @@
+---
+layout: default
+---
+
+<article class="post-shell">
+  <header class="post-hero">
+    <a class="back-link" href="{{ '/archive/' | relative_url }}">← 返回归档</a>
+    <p class="post-date">{{ page.date | date: "%Y.%m.%d" }}</p>
+    <h1>{{ page.title }}</h1>
+    {% if page.categories and page.categories != empty %}
+      <p class="post-taxonomy">{{ page.categories | join: " · " }}</p>
+    {% endif %}
+  </header>
+
+  <div class="post-body">
+    {{ content }}
+  </div>
+</article>

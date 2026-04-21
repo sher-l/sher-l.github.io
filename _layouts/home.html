@@ -1,0 +1,84 @@
+---
+layout: default
+---
+
+<section class="hero-shell">
+  <div class="hero-grid">
+    <div class="hero-copy">
+      <p class="hero-kicker">Personal notebook</p>
+      <h1>写给未来自己的系统笔记，也顺手留给正在路过的人。</h1>
+      <p class="hero-intro">{{ site.description }}</p>
+
+      <div class="hero-actions">
+        <a class="button button-primary" href="{{ '/archive/' | relative_url }}">浏览文章</a>
+        <a class="button button-secondary" href="https://github.com/{{ site.author.github }}" target="_blank" rel="noreferrer">查看 GitHub</a>
+      </div>
+    </div>
+
+    <aside class="hero-panel">
+      <p class="panel-eyebrow">Site note</p>
+      <p class="panel-text">{{ site.tagline }}</p>
+      <div class="panel-rule"></div>
+      <p class="panel-caption">
+        偏爱那些经过一轮折腾之后，依然值得留下来的经验：配置、排错、工作流，以及长期有效的小结论。
+      </p>
+    </aside>
+  </div>
+</section>
+
+<section class="focus-shell">
+  <div class="focus-card">
+    <p class="focus-kicker">01</p>
+    <h2>Systems</h2>
+    <p>系统设置、环境修复和那些表面很小、但总会反复遇到的问题。</p>
+  </div>
+  <div class="focus-card">
+    <p class="focus-kicker">02</p>
+    <h2>Workflow</h2>
+    <p>工具选择、构建过程和尽量不重复踩第二次的工作方式。</p>
+  </div>
+  <div class="focus-card">
+    <p class="focus-kicker">03</p>
+    <h2>Notes</h2>
+    <p>写下来并不是为了完整，而是为了在下次需要时还能快速找回。</p>
+  </div>
+</section>
+
+<section class="content-grid" id="recent">
+  <div class="content-primary">
+    <div class="section-heading">
+      <p class="section-kicker">Recent posts</p>
+      <h2>最近的记录</h2>
+      <p>保持列表简洁，但让每篇文章都足够明确、可回看、可复用。</p>
+    </div>
+
+    <div class="post-stream">
+      {% for post in site.posts limit: 6 %}
+        <article class="post-card">
+          <div class="post-card-meta">
+            <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%Y.%m.%d" }}</time>
+            {% if post.categories and post.categories != empty %}
+              <span>{{ post.categories | join: " · " }}</span>
+            {% endif %}
+          </div>
+          <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+          <p>{{ post.excerpt | strip_html | strip_newlines | truncate: 120 }}</p>
+        </article>
+      {% endfor %}
+    </div>
+  </div>
+
+  <aside class="content-aside" id="about">
+    <div class="section-heading section-heading-compact">
+      <p class="section-kicker">About</p>
+      <h2>这个站点</h2>
+    </div>
+    <div class="note-card">
+      {{ content }}
+    </div>
+    <div class="aside-links">
+      <a href="{{ '/archive/' | relative_url }}">查看完整归档</a>
+      <a href="https://github.com/{{ site.author.github }}" target="_blank" rel="noreferrer">访问 GitHub 主页</a>
+    </div>
+  </aside>
+</section>

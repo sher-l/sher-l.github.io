@@ -1,7 +1,12 @@
 theme: minima
-title: icekiki's homepage
+title: sher-l
 SEOTitle: sher-l | Blog
-description: ^ ^
+description: 记录系统、工具和一些值得长期保存的折腾经验。
+tagline: A quieter notebook for systems, tools, and useful detours.
+lang: zh-CN
+author:
+  name: sher-l
+  github: sher-l
 
 # post time
 future: true

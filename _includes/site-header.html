@@ -1,0 +1,15 @@
+<header class="site-header">
+  <div class="nav-shell">
+    <a class="brandmark" href="{{ '/' | relative_url }}">
+      <span class="brandmark-label">{{ site.title }}</span>
+      <span class="brandmark-subtle">{{ site.tagline }}</span>
+    </a>
+
+    <nav class="site-nav" aria-label="Primary">
+      <a href="{{ '/' | relative_url }}#recent">Recent</a>
+      <a href="{{ '/' | relative_url }}#about">About</a>
+      <a href="{{ '/archive/' | relative_url }}">Archive</a>
+      <a href="https://github.com/{{ site.author.github }}" target="_blank" rel="noreferrer">GitHub</a>
+    </nav>
+  </div>
+</header>
