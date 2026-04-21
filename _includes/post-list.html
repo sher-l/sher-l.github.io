@@ -15,12 +15,12 @@
           <div class="post-card-meta">
             {% if post.categories and post.categories != empty %}
               {% for category in post.categories %}
-                <span>{{ category }}</span>
+                <a href="{{ '/tags/#' | append: (category | slugify) | relative_url }}"><span>{{ category }}</span></a>
               {% endfor %}
             {% endif %}
           </div>
         </div>
-        <span class="post-card-arrow">›</span>
+        <span class="post-card-arrow">&gt;</span>
       </a>
     </article>
   {% endfor %}

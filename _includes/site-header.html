@@ -8,9 +8,11 @@
     <nav class="site-nav" aria-label="Primary">
       <a class="{% if page.url == '/' %}active{% endif %}" href="{{ '/' | relative_url }}">Home</a>
       <a class="{% if page.url == '/blog/' or page.url == '/archive/' or page.layout == 'post' %}active{% endif %}" href="{{ '/blog/' | relative_url }}">Blog</a>
+      <a class="{% if page.url == '/tags/' %}active{% endif %}" href="{{ '/tags/' | relative_url }}">Tags</a>
       <a class="{% if page.url == '/projects/' %}active{% endif %}" href="{{ '/projects/' | relative_url }}">Projects</a>
       <a class="{% if page.url == '/links/' %}active{% endif %}" href="{{ '/links/' | relative_url }}">Links</a>
       <a class="{% if page.url == '/about/' %}active{% endif %}" href="{{ '/about/' | relative_url }}">About</a>
+      <a class="{% if page.url == '/search/' %}active{% endif %}" href="{{ '/search/' | relative_url }}">Search</a>
     </nav>
   </div>
 </header>
