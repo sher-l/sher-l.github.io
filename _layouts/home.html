@@ -2,40 +2,16 @@
 layout: default
 ---
 
-<section class="profile-shell">
-  <div class="profile-grid">
-    <div class="profile-copy">
-      <p class="hero-kicker">Notebook</p>
-      <h1>{{ site.author.name }} <span>{{ site.profile.handle }}</span></h1>
-      <p class="profile-summary">{{ site.profile.summary }}</p>
-      <p class="hero-intro">{{ site.description }}</p>
+<section class="home-intro">
+  <p class="hero-kicker">IKL notebook</p>
+  <h1>{{ site.author.name }} <span>{{ site.profile.handle }}</span></h1>
+  <p class="profile-summary">{{ site.profile.summary }}</p>
+  <p class="hero-intro">{{ site.description }}</p>
 
-      <div class="hero-actions">
-        <a class="button button-primary" href="{{ '/archive/' | relative_url }}">查看归档</a>
-        <a class="button button-secondary" href="{{ site.links.github }}" target="_blank" rel="noreferrer">GitHub</a>
-        <a class="button button-secondary" href="{{ site.links.orcid }}" target="_blank" rel="noreferrer">ORCID</a>
-      </div>
-    </div>
-
-    <aside class="profile-meta">
-      <div class="meta-block">
-        <p class="panel-eyebrow">Current focus</p>
-        <p class="panel-text">{{ site.profile.focus }}</p>
-      </div>
-      <div class="meta-block">
-        <p class="panel-eyebrow">Tech stack</p>
-        <div class="stack-list">
-          {% for item in site.profile.tech_stack %}
-            <span>{{ item }}</span>
-          {% endfor %}
-        </div>
-      </div>
-      <div class="meta-block" id="projects">
-        <p class="panel-eyebrow">Featured project</p>
-        <a class="feature-link" href="{{ site.featured_project.url }}" target="_blank" rel="noreferrer">{{ site.featured_project.name }}</a>
-        <p class="panel-caption">{{ site.featured_project.description }}</p>
-      </div>
-    </aside>
+  <div class="home-links">
+    <a href="{{ '/archive/' | relative_url }}">归档</a>
+    <a href="{{ site.links.github }}" target="_blank" rel="noreferrer">GitHub</a>
+    <a href="{{ site.links.orcid }}" target="_blank" rel="noreferrer">ORCID</a>
   </div>
 </section>
 
@@ -65,6 +41,12 @@ layout: default
         </article>
       {% endfor %}
     </div>
+
+    <section class="home-project" id="projects">
+      <p class="focus-kicker">Featured project</p>
+      <h2><a class="feature-link" href="{{ site.featured_project.url }}" target="_blank" rel="noreferrer">{{ site.featured_project.name }}</a></h2>
+      <p>{{ site.featured_project.description }}</p>
+    </section>
   </div>
 
   <aside class="content-aside">
@@ -73,21 +55,30 @@ layout: default
       <h2>关于这个站</h2>
     </div>
 
-    <div class="note-card">
+    <div class="sidebar-block sidebar-copy">
       {{ content }}
     </div>
 
-    <div class="info-card">
+    <div class="sidebar-block">
       <p class="panel-eyebrow">About me</p>
       <p>{{ site.profile.summary }}</p>
     </div>
 
-    <div class="info-card">
+    <div class="sidebar-block">
       <p class="panel-eyebrow">Current focus</p>
       <p>{{ site.profile.focus }}</p>
     </div>
 
-    <div class="info-card">
+    <div class="sidebar-block">
+      <p class="panel-eyebrow">Tech stack</p>
+      <div class="stack-list">
+        {% for item in site.profile.tech_stack %}
+          <span>{{ item }}</span>
+        {% endfor %}
+      </div>
+    </div>
+
+    <div class="sidebar-block">
       <p class="panel-eyebrow">Quick links</p>
       <div class="aside-links">
         <a href="{{ site.links.github }}" target="_blank" rel="noreferrer">GitHub</a>
@@ -97,18 +88,4 @@ layout: default
       </div>
     </div>
   </aside>
-</section>
-
-<section class="feature-strip">
-  <div class="feature-card feature-card-wide">
-    <p class="focus-kicker">Project</p>
-    <h2>{{ site.featured_project.name }}</h2>
-    <p>{{ site.featured_project.description }}</p>
-    <a class="feature-link" href="{{ site.featured_project.url }}" target="_blank" rel="noreferrer">查看项目</a>
-  </div>
-  <div class="feature-card">
-    <p class="focus-kicker">Focus</p>
-    <h2>工作方式</h2>
-    <p>优先保存能重复利用的分析流程、系统配置和真正用过之后还值得留下来的经验。</p>
-  </div>
 </section>
