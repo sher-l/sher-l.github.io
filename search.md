@@ -8,6 +8,7 @@ eyebrow: Search
 
 {% include search-box.html
   id="search-input"
+  class="site-search-box-page"
   label="搜索站内内容"
   placeholder="例如：jekyll、windows、python"
   hint="支持匹配标题、摘要、正文和分类。"
