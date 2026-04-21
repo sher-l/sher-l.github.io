@@ -6,11 +6,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const siteHeader = document.querySelector("[data-site-header]");
   const searchIndexUrl = "/search.json";
   const globalSearchCloseThreshold = 12;
+  const globalSearchSettleDelayMs = 360;
 
   if (!searchRoots.length && !searchToggle) return;
 
   let postsPromise;
   let globalSearchOpenedAtScrollY = null;
+  let globalSearchIgnoreScrollUntil = 0;
+  let globalSearchSettleTimer = null;
 
   const escapeHtml = (value) =>
     String(value || "")
@@ -78,10 +81,24 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const setPanelOpen = (open) => {
     if (!globalPanel || !searchToggle) return;
+    if (globalSearchSettleTimer) {
+      window.clearTimeout(globalSearchSettleTimer);
+      globalSearchSettleTimer = null;
+    }
     globalPanel.setAttribute("aria-hidden", String(!open));
     searchToggle.setAttribute("aria-expanded", String(open));
     siteHeader?.classList.toggle("search-open", open);
-    globalSearchOpenedAtScrollY = open ? window.scrollY : null;
+    if (open) {
+      globalSearchIgnoreScrollUntil = performance.now() + globalSearchSettleDelayMs;
+      globalSearchOpenedAtScrollY = window.scrollY;
+      globalSearchSettleTimer = window.setTimeout(() => {
+        globalSearchOpenedAtScrollY = window.scrollY;
+        globalSearchSettleTimer = null;
+      }, globalSearchSettleDelayMs);
+    } else {
+      globalSearchOpenedAtScrollY = null;
+      globalSearchIgnoreScrollUntil = 0;
+    }
     if (open && globalInput) {
       globalInput.focus();
       globalInput.select();
@@ -195,6 +212,7 @@ document.addEventListener("DOMContentLoaded", () => {
       "scroll",
       () => {
         if (!isGlobalSearchOpen()) return;
+        if (performance.now() < globalSearchIgnoreScrollUntil) return;
         if (globalSearchOpenedAtScrollY === null) {
           globalSearchOpenedAtScrollY = window.scrollY;
           return;
