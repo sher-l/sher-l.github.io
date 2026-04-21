@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Archive
+title: 归档
 description: 所有文章与记录。
 permalink: /archive/
 ---
@@ -24,7 +24,7 @@ permalink: /archive/
         <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%m.%d" }}</time>
         <div>
           <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
-          <p>{{ post.excerpt | strip_html | strip_newlines | truncate: 110 }}</p>
+          <p>{{ post.excerpt | strip_html | strip_newlines | truncate: 96 }}</p>
         </div>
       </article>
     {% endfor %}

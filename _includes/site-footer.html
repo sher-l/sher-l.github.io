@@ -5,8 +5,9 @@
       <p class="footer-copy">{{ site.description }}</p>
     </div>
     <div class="footer-meta">
-      <a href="{{ '/archive/' | relative_url }}">Archive</a>
-      <a href="https://github.com/{{ site.author.github }}" target="_blank" rel="noreferrer">GitHub</a>
+      <a href="{{ '/archive/' | relative_url }}">归档</a>
+      <a href="{{ site.links.github }}" target="_blank" rel="noreferrer">GitHub</a>
+      <a href="{{ site.links.orcid }}" target="_blank" rel="noreferrer">ORCID</a>
       <span>© {{ site.time | date: "%Y" }}</span>
     </div>
   </div>

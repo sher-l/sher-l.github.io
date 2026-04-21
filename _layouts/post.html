@@ -14,5 +14,20 @@ layout: default
 
   <div class="post-body">
     {{ content }}
+
+    <footer class="post-footer-nav">
+      {% if page.previous %}
+        <a class="post-nav-card" href="{{ page.previous.url | relative_url }}">
+          <span>上一篇</span>
+          <strong>{{ page.previous.title }}</strong>
+        </a>
+      {% endif %}
+      {% if page.next %}
+        <a class="post-nav-card" href="{{ page.next.url | relative_url }}">
+          <span>下一篇</span>
+          <strong>{{ page.next.title }}</strong>
+        </a>
+      {% endif %}
+    </footer>
   </div>
 </article>

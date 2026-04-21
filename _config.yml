@@ -1,18 +1,35 @@
 theme: minima
 title: sher-l
 SEOTitle: sher-l | Blog
-description: 记录系统、工具和一些值得长期保存的折腾经验。
-tagline: A quieter notebook for systems, tools, and useful detours.
+description: 记录 R、Python、Linux 下的分析流程、工具链和那些值得长期保存的折腾经验。
+tagline: 生信分析、系统配置与工作流笔记。
 lang: zh-CN
 author:
   name: sher-l
   github: sher-l
+profile:
+  handle: "~$herLock"
+  summary: "Building tools and analysis pipelines with R, Python, and Linux."
+  focus: "Dark Factory"
+  tech_stack:
+    - R
+    - Python
+    - Linux
+    - Git
+    - VS Code
+links:
+  github: "https://github.com/sher-l"
+  orcid: "https://orcid.org/0009-0007-8321-9786"
+featured_project:
+  name: "iklSurvML"
+  url: "https://github.com/sher-l/iklSurvML"
+  description: "High-performance survival machine learning in R with reproducible workflows, multiple algorithm combinations, and practical benchmarking."
 
 # post time
 future: true
 timezone: Asia/Shanghai
 
 # sitemap
-url: "https://sher-l.github.io" 
+url: "https://sher-l.github.io"
 plugins:
   - jekyll-sitemap

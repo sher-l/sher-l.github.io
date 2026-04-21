@@ -2,83 +2,113 @@
 layout: default
 ---
 
-<section class="hero-shell">
-  <div class="hero-grid">
-    <div class="hero-copy">
-      <p class="hero-kicker">Personal notebook</p>
-      <h1>写给未来自己的系统笔记，也顺手留给正在路过的人。</h1>
+<section class="profile-shell">
+  <div class="profile-grid">
+    <div class="profile-copy">
+      <p class="hero-kicker">Notebook</p>
+      <h1>{{ site.author.name }} <span>{{ site.profile.handle }}</span></h1>
+      <p class="profile-summary">{{ site.profile.summary }}</p>
       <p class="hero-intro">{{ site.description }}</p>
 
       <div class="hero-actions">
-        <a class="button button-primary" href="{{ '/archive/' | relative_url }}">浏览文章</a>
-        <a class="button button-secondary" href="https://github.com/{{ site.author.github }}" target="_blank" rel="noreferrer">查看 GitHub</a>
+        <a class="button button-primary" href="{{ '/archive/' | relative_url }}">查看归档</a>
+        <a class="button button-secondary" href="{{ site.links.github }}" target="_blank" rel="noreferrer">GitHub</a>
+        <a class="button button-secondary" href="{{ site.links.orcid }}" target="_blank" rel="noreferrer">ORCID</a>
       </div>
     </div>
 
-    <aside class="hero-panel">
-      <p class="panel-eyebrow">Site note</p>
-      <p class="panel-text">{{ site.tagline }}</p>
-      <div class="panel-rule"></div>
-      <p class="panel-caption">
-        偏爱那些经过一轮折腾之后，依然值得留下来的经验：配置、排错、工作流，以及长期有效的小结论。
-      </p>
+    <aside class="profile-meta">
+      <div class="meta-block">
+        <p class="panel-eyebrow">Current focus</p>
+        <p class="panel-text">{{ site.profile.focus }}</p>
+      </div>
+      <div class="meta-block">
+        <p class="panel-eyebrow">Tech stack</p>
+        <div class="stack-list">
+          {% for item in site.profile.tech_stack %}
+            <span>{{ item }}</span>
+          {% endfor %}
+        </div>
+      </div>
+      <div class="meta-block" id="projects">
+        <p class="panel-eyebrow">Featured project</p>
+        <a class="feature-link" href="{{ site.featured_project.url }}" target="_blank" rel="noreferrer">{{ site.featured_project.name }}</a>
+        <p class="panel-caption">{{ site.featured_project.description }}</p>
+      </div>
     </aside>
   </div>
 </section>
 
-<section class="focus-shell">
-  <div class="focus-card">
-    <p class="focus-kicker">01</p>
-    <h2>Systems</h2>
-    <p>系统设置、环境修复和那些表面很小、但总会反复遇到的问题。</p>
-  </div>
-  <div class="focus-card">
-    <p class="focus-kicker">02</p>
-    <h2>Workflow</h2>
-    <p>工具选择、构建过程和尽量不重复踩第二次的工作方式。</p>
-  </div>
-  <div class="focus-card">
-    <p class="focus-kicker">03</p>
-    <h2>Notes</h2>
-    <p>写下来并不是为了完整，而是为了在下次需要时还能快速找回。</p>
-  </div>
-</section>
-
-<section class="content-grid" id="recent">
-  <div class="content-primary">
+<section class="content-grid">
+  <div class="content-primary" id="posts">
     <div class="section-heading">
-      <p class="section-kicker">Recent posts</p>
-      <h2>最近的记录</h2>
-      <p>保持列表简洁，但让每篇文章都足够明确、可回看、可复用。</p>
+      <p class="section-kicker">Posts</p>
+      <h2>最近文章</h2>
+      <p>以问题为单位记录，尽量让每篇文章都可检索、可复用、可回看。</p>
     </div>
 
     <div class="post-stream">
       {% for post in site.posts limit: 6 %}
-        <article class="post-card">
-          <div class="post-card-meta">
-            <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%Y.%m.%d" }}</time>
-            {% if post.categories and post.categories != empty %}
-              <span>{{ post.categories | join: " · " }}</span>
-            {% endif %}
+        <article class="post-row">
+          <time class="post-row-date" datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%Y.%m.%d" }}</time>
+          <div class="post-row-body">
+            <div class="post-card-meta">
+              {% if post.categories and post.categories != empty %}
+                <span>{{ post.categories | join: " · " }}</span>
+              {% else %}
+                <span>note</span>
+              {% endif %}
+            </div>
+            <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+            <p>{{ post.excerpt | strip_html | strip_newlines | truncate: 104 }}</p>
           </div>
-          <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
-          <p>{{ post.excerpt | strip_html | strip_newlines | truncate: 120 }}</p>
         </article>
       {% endfor %}
     </div>
   </div>
 
-  <aside class="content-aside" id="about">
-    <div class="section-heading section-heading-compact">
+  <aside class="content-aside">
+    <div class="section-heading section-heading-compact" id="about">
       <p class="section-kicker">About</p>
-      <h2>这个站点</h2>
+      <h2>关于这个站</h2>
     </div>
+
     <div class="note-card">
       {{ content }}
     </div>
-    <div class="aside-links">
-      <a href="{{ '/archive/' | relative_url }}">查看完整归档</a>
-      <a href="https://github.com/{{ site.author.github }}" target="_blank" rel="noreferrer">访问 GitHub 主页</a>
+
+    <div class="info-card">
+      <p class="panel-eyebrow">About me</p>
+      <p>{{ site.profile.summary }}</p>
+    </div>
+
+    <div class="info-card">
+      <p class="panel-eyebrow">Current focus</p>
+      <p>{{ site.profile.focus }}</p>
+    </div>
+
+    <div class="info-card">
+      <p class="panel-eyebrow">Quick links</p>
+      <div class="aside-links">
+        <a href="{{ site.links.github }}" target="_blank" rel="noreferrer">GitHub</a>
+        <a href="{{ site.links.orcid }}" target="_blank" rel="noreferrer">ORCID</a>
+        <a href="{{ site.featured_project.url }}" target="_blank" rel="noreferrer">{{ site.featured_project.name }}</a>
+        <a href="{{ '/archive/' | relative_url }}">完整归档</a>
+      </div>
     </div>
   </aside>
+</section>
+
+<section class="feature-strip">
+  <div class="feature-card feature-card-wide">
+    <p class="focus-kicker">Project</p>
+    <h2>{{ site.featured_project.name }}</h2>
+    <p>{{ site.featured_project.description }}</p>
+    <a class="feature-link" href="{{ site.featured_project.url }}" target="_blank" rel="noreferrer">查看项目</a>
+  </div>
+  <div class="feature-card">
+    <p class="focus-kicker">Focus</p>
+    <h2>工作方式</h2>
+    <p>优先保存能重复利用的分析流程、系统配置和真正用过之后还值得留下来的经验。</p>
+  </div>
 </section>
