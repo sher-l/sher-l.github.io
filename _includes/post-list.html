@@ -1,22 +1,27 @@
-<div class="post-stream">
-  {% if include.limit %}
-    {% assign list_limit = include.limit %}
-  {% else %}
-    {% assign list_limit = site.posts.size %}
-  {% endif %}
+{% if include.limit %}
+  {% assign list_limit = include.limit %}
+{% else %}
+  {% assign list_limit = site.posts.size %}
+{% endif %}
 
+<div class="post-card-list">
   {% for post in site.posts limit: list_limit %}
-    <article class="post-row">
-      <div class="post-row-date-wrap">
-        <time class="post-row-date" datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%Y.%m.%d" }}</time>
-        {% if post.categories and post.categories != empty %}
-          <p class="post-row-tags">{{ post.categories | join: " · " }}</p>
-        {% endif %}
-      </div>
-      <div class="post-row-body">
-        <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
-        <p>{{ post.excerpt | strip_html | strip_newlines | truncate: 120 }}</p>
-      </div>
+    <article class="post-card">
+      <a class="post-card-link" href="{{ post.url | relative_url }}">
+        <div class="post-card-main">
+          <time class="post-card-date" datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %-d, %Y" }}</time>
+          <h3>{{ post.title }}</h3>
+          <p>{{ post.excerpt | strip_html | strip_newlines | truncate: 132 }}</p>
+          <div class="post-card-meta">
+            {% if post.categories and post.categories != empty %}
+              {% for category in post.categories %}
+                <span>{{ category }}</span>
+              {% endfor %}
+            {% endif %}
+          </div>
+        </div>
+        <span class="post-card-arrow">›</span>
+      </a>
     </article>
   {% endfor %}
 </div>

@@ -3,61 +3,49 @@ layout: default
 ---
 
 <section class="home-shell">
-  <header class="home-lead">
-    <p class="page-eyebrow">IKL Notebook</p>
-    <h1>生信分析、系统配置与工作流笔记</h1>
-    <p class="home-summary">{{ site.description }}</p>
-  </header>
+  <div class="home-intro-card">
+    <p class="page-eyebrow">IKL</p>
+    <h1>{{ site.title }}</h1>
+    <p class="home-intro-copy">{{ site.description }}</p>
+    <div class="home-intro-meta">
+      <span>{{ site.profile.summary }}</span>
+      <span>{{ site.profile.focus }}</span>
+    </div>
+  </div>
 
-  <div class="home-columns">
-    <div class="home-main">
-      <section class="section-block">
-        <div class="section-heading">
-          <p class="section-kicker">Recent Posts</p>
-          <h2>最近文章</h2>
-          <p>以问题为单位记录，尽量让每篇文章都可检索、可复用、可回看。</p>
+  <div class="blog-grid">
+    <div class="blog-main">
+      <section class="section-heading section-heading-inline">
+        <div>
+          <p class="section-kicker">Latest</p>
+          <h2>Recent Posts</h2>
         </div>
-        {% include post-list.html limit=6 %}
+        <a class="section-link" href="{{ '/blog/' | relative_url }}">View all posts →</a>
       </section>
 
-      <section class="section-block section-compact">
-        <p class="section-kicker">Project</p>
-        <h2><a class="feature-link" href="{{ site.featured_project.url }}" target="_blank" rel="noreferrer">{{ site.featured_project.name }}</a></h2>
-        <p>{{ site.featured_project.description }}</p>
-      </section>
+      {% include post-list.html limit=4 %}
     </div>
 
-    <aside class="home-side">
-      <section class="side-section">
-        <p class="section-kicker">About</p>
+    <aside class="blog-side">
+      <section class="side-card">
+        <p class="side-title">About</p>
         <div class="side-copy">
           {{ content }}
         </div>
       </section>
 
-      <section class="side-section">
-        <p class="section-kicker">Profile</p>
-        <h3>{{ site.author.name }} <span>{{ site.profile.handle }}</span></h3>
-        <p>{{ site.profile.summary }}</p>
-      </section>
-
-      <section class="side-section">
-        <p class="section-kicker">Current Focus</p>
-        <p>{{ site.profile.focus }}</p>
-      </section>
-
-      <section class="side-section">
-        <p class="section-kicker">Tech Stack</p>
-        <div class="chip-list">
+      <section class="side-card">
+        <p class="side-title">Tech Stack</p>
+        <div class="tag-cloud tag-cloud-soft">
           {% for item in site.profile.tech_stack %}
             <span>{{ item }}</span>
           {% endfor %}
         </div>
       </section>
 
-      <section class="side-section">
-        <p class="section-kicker">Links</p>
-        <div class="link-list">
+      <section class="side-card">
+        <p class="side-title">Links</p>
+        <div class="side-links">
           <a href="{{ '/blog/' | relative_url }}">Blog</a>
           <a href="{{ '/projects/' | relative_url }}">Projects</a>
           <a href="{{ '/links/' | relative_url }}">Links</a>

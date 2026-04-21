@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: blog
 title: Blog
 description: 所有文章与记录。
 permalink: /blog/

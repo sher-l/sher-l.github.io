@@ -2,34 +2,44 @@
 layout: default
 ---
 
-<article class="post-shell">
-  <header class="post-head">
-    <p class="page-eyebrow">Post</p>
-    <h1>{{ page.title }}</h1>
-    <div class="post-meta">
-      <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%Y.%m.%d" }}</time>
-      {% if page.categories and page.categories != empty %}
-        <span>{{ page.categories | join: " · " }}</span>
-      {% endif %}
-    </div>
-  </header>
+<article class="post-layout">
+  <div class="post-main">
+    <header class="post-head post-head-compact">
+      <a class="back-link" href="{{ '/blog/' | relative_url }}">← Back</a>
+      <div class="post-meta">
+        <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%b %-d, %Y" }}</time>
+        <span>中文</span>
+        {% if page.categories and page.categories != empty %}
+          <span>{{ page.categories | join: " / " }}</span>
+        {% endif %}
+      </div>
+      <h1>{{ page.title }}</h1>
+    </header>
 
-  <div class="post-body">
-    {{ content }}
+    <div class="post-body">
+      {{ content }}
+    </div>
+
+    <footer class="post-footer-nav">
+      {% if page.previous %}
+        <a class="post-nav-card" href="{{ page.previous.url | relative_url }}">
+          <span>上一篇</span>
+          <strong>{{ page.previous.title }}</strong>
+        </a>
+      {% endif %}
+      {% if page.next %}
+        <a class="post-nav-card" href="{{ page.next.url | relative_url }}">
+          <span>下一篇</span>
+          <strong>{{ page.next.title }}</strong>
+        </a>
+      {% endif %}
+    </footer>
   </div>
 
-  <footer class="post-footer-nav">
-    {% if page.previous %}
-      <a class="post-nav-card" href="{{ page.previous.url | relative_url }}">
-        <span>上一篇</span>
-        <strong>{{ page.previous.title }}</strong>
-      </a>
-    {% endif %}
-    {% if page.next %}
-      <a class="post-nav-card" href="{{ page.next.url | relative_url }}">
-        <span>下一篇</span>
-        <strong>{{ page.next.title }}</strong>
-      </a>
-    {% endif %}
-  </footer>
+  <aside class="post-side">
+    <div class="toc-card" id="toc-card">
+      <p class="side-title">Table of Contents</p>
+      <div class="toc-list" id="toc-list"></div>
+    </div>
+  </aside>
 </article>

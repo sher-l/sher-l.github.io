@@ -1,0 +1,36 @@
+---
+layout: default
+---
+
+<section class="blog-shell">
+  <div class="page-head">
+    <p class="page-eyebrow">{{ page.eyebrow | default: "Blog" }}</p>
+    <h1>{{ page.title }}</h1>
+    {% if page.description %}
+      <p class="page-description">{{ page.description }}</p>
+    {% endif %}
+  </div>
+
+  <div class="blog-grid">
+    <div class="blog-main">
+      {{ content }}
+    </div>
+
+    <aside class="blog-side">
+      <section class="side-card">
+        <p class="side-title">Tags</p>
+        {% include tag-cloud.html %}
+      </section>
+
+      <section class="side-card">
+        <p class="side-title">Profile</p>
+        <p>{{ site.profile.summary }}</p>
+        <div class="side-links">
+          <a href="{{ site.links.github }}" target="_blank" rel="noreferrer">GitHub</a>
+          <a href="{{ site.links.orcid }}" target="_blank" rel="noreferrer">ORCID</a>
+          <a href="{{ '/projects/' | relative_url }}">Projects</a>
+        </div>
+      </section>
+    </aside>
+  </div>
+</section>
