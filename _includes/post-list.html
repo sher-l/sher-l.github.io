@@ -31,8 +31,8 @@
             {% endif %}
           </div>
           <div class="post-card-side-home">
-            <a class="post-card-jump-home" href="{{ post.url | relative_url }}" aria-label="{{ post.title }}">
-              <span class="post-card-arrow">→</span>
+            <a class="post-card-jump post-card-jump-home" href="{{ post.url | relative_url }}" aria-label="{{ post.title }}">
+              <span class="post-card-arrow">&rarr;</span>
             </a>
             <div class="post-card-stats post-card-stats-home">
               <span>{{ reading_minutes }} min read</span>
@@ -43,27 +43,31 @@
       </article>
     {% else %}
       <article class="post-card">
-        <a class="post-card-link" href="{{ post.url | relative_url }}">
+        <div class="post-card-shell">
           <div class="post-card-main">
             <time class="post-card-date" datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %-d, %Y" }}</time>
-            <div class="post-card-head">
-              <h3>{{ post.title }}</h3>
-              <span class="post-card-arrow">→</span>
+            <div class="post-card-title-row">
+              <a class="post-card-title-link" href="{{ post.url | relative_url }}">
+                <h3>{{ post.title }}</h3>
+              </a>
+              <a class="post-card-jump" href="{{ post.url | relative_url }}" aria-label="{{ post.title }}">
+                <span class="post-card-arrow">&rarr;</span>
+              </a>
             </div>
-            <p>{{ post.excerpt | strip_html | strip_newlines | truncate: 132 }}</p>
+            <p>{{ post.excerpt | strip_html | strip_newlines | truncate: 180 }}</p>
             <div class="post-card-stats">
               <span>{{ reading_minutes }} min read</span>
               <span>中文</span>
             </div>
-            <div class="post-card-meta">
-              {% if post.categories and post.categories != empty %}
+            {% if post.categories and post.categories != empty %}
+              <div class="post-card-meta">
                 {% for category in post.categories %}
                   <a href="{{ '/tags/' | relative_url }}#{{ category | slugify }}"><span>{{ category }}</span></a>
                 {% endfor %}
-              {% endif %}
-            </div>
+              </div>
+            {% endif %}
           </div>
-        </a>
+        </div>
       </article>
     {% endif %}
   {% endfor %}

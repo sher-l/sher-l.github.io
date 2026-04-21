@@ -10,43 +10,45 @@ layout: default
 {% assign article_deck = page.description | default: page.excerpt | strip_html | strip_newlines | truncate: 140 %}
 
 <article class="reading-shell">
-  <a class="back-link" href="{{ '/blog/' | relative_url }}">Back</a>
+  <a class="back-link" href="{{ '/blog/' | relative_url }}" data-back-link>Back</a>
 
   <div class="reading-grid">
     <div class="reading-main">
-      <header class="article-header" id="content-header">
-        <div class="article-meta-line">
-          <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%b %-d, %Y" }}</time>
-          <span>{{ reading_minutes }} min read</span>
-          <span>中文</span>
-          {% if page.categories and page.categories != empty %}
-            <span>
-              {% for category in page.categories %}
-                <a href="{{ '/tags/' | relative_url }}#{{ category | slugify }}"># {{ category }}</a>{% unless forloop.last %} / {% endunless %}
-              {% endfor %}
-            </span>
+      <div class="article-panel">
+        <header class="article-header" id="content-header">
+          <div class="article-meta-line">
+            <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%b %-d, %Y" }}</time>
+            <span>{{ reading_minutes }} min read</span>
+            <span>中文</span>
+            {% if page.categories and page.categories != empty %}
+              <span>
+                {% for category in page.categories %}
+                  <a href="{{ '/tags/' | relative_url }}#{{ category | slugify }}"># {{ category }}</a>{% unless forloop.last %} / {% endunless %}
+                {% endfor %}
+              </span>
+            {% endif %}
+          </div>
+          <h1>{{ page.title }}</h1>
+          {% if article_deck != blank %}
+            <p class="article-deck">{{ article_deck }}</p>
           {% endif %}
-        </div>
-        <h1>{{ page.title }}</h1>
-        {% if article_deck != blank %}
-          <p class="article-deck">{{ article_deck }}</p>
-        {% endif %}
-      </header>
+        </header>
 
-      <div class="post-body" id="content">
-        {{ content }}
+        <div class="post-body" id="content">
+          {{ content }}
+        </div>
       </div>
 
       <footer class="post-footer-nav">
         {% if page.previous %}
           <a class="post-nav-card" href="{{ page.previous.url | relative_url }}">
-            <span>上一篇</span>
+            <span>Previous</span>
             <strong>{{ page.previous.title }}</strong>
           </a>
         {% endif %}
         {% if page.next %}
           <a class="post-nav-card" href="{{ page.next.url | relative_url }}">
-            <span>下一篇</span>
+            <span>Next</span>
             <strong>{{ page.next.title }}</strong>
           </a>
         {% endif %}

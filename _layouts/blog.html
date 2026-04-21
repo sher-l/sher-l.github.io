@@ -3,7 +3,7 @@ layout: default
 ---
 
 <section class="collection-shell">
-  <a class="back-link" href="{{ '/' | relative_url }}">Back</a>
+  <a class="back-link" href="{{ '/' | relative_url }}" data-back-link>Back</a>
 
   <header class="collection-head" id="content-header">
     <h1>{{ page.title }}</h1>
@@ -14,37 +14,26 @@ layout: default
 
   <div class="collection-grid">
     <section class="collection-main" id="content">
-      <div class="collection-summary">
-        <span>Showing {{ site.posts | size }} posts</span>
-        <a href="{{ '/archive/' | relative_url }}">View all posts by years →</a>
+      <div class="collection-panel">
+        <div class="collection-summary">
+          <span>Showing {{ site.posts | size }} posts</span>
+          <a href="{{ '/archive/' | relative_url }}">View all posts by years &rarr;</a>
+        </div>
+        {{ content }}
       </div>
-      {{ content }}
     </section>
 
     <aside class="collection-side" id="sidebar">
       <section class="side-block">
         <h2>Tags</h2>
         {% include tag-cloud.html %}
-        <a class="side-more" href="{{ '/tags/' | relative_url }}">View all →</a>
+        <a class="side-more" href="{{ '/tags/' | relative_url }}">View all &rarr;</a>
       </section>
 
       <section class="side-block">
         <h2>Archive</h2>
-        <p>按年份浏览全部文章与记录。</p>
-        <a class="side-utility" href="{{ '/archive/' | relative_url }}">Go to archive →</a>
-      </section>
-
-      <section class="side-block">
-        <h2>Search</h2>
-        {% include search-box.html
-          id="blog-search-input"
-          label="Search posts"
-          placeholder="例如：windows、jekyll、r"
-          hint="直接在当前页展开结果，不跳到单独页面。"
-          live=true
-          limit=4
-          results_compact=true
-          more_label="打开完整搜索页 →" %}
+        <p>Browse all posts and notes by year.</p>
+        <a class="side-utility" href="{{ '/archive/' | relative_url }}">Go to archive &rarr;</a>
       </section>
     </aside>
   </div>

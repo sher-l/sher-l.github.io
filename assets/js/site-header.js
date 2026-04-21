@@ -1,4 +1,21 @@
 document.addEventListener("DOMContentLoaded", () => {
+  const backLinks = Array.from(document.querySelectorAll("[data-back-link]"));
+  backLinks.forEach((link) => {
+    link.addEventListener("click", (event) => {
+      if (window.history.length <= 1 || !document.referrer) return;
+
+      try {
+        const referrer = new URL(document.referrer, window.location.href);
+        if (referrer.origin !== window.location.origin) return;
+      } catch {
+        return;
+      }
+
+      event.preventDefault();
+      window.history.back();
+    });
+  });
+
   const header = document.querySelector("[data-site-header]");
   if (!header) return;
 
