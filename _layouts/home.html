@@ -52,7 +52,7 @@ layout: default
             <p>Recent notes, debugging logs, and workflow records.</p>
             <a href="{{ '/blog/' | relative_url }}">More posts →</a>
           </div>
-          {% include post-list.html limit=6 %}
+          {% include post-list.html limit=6 variant="home" %}
         </div>
       </section>
     {% endif %}
@@ -73,36 +73,6 @@ layout: default
             <p>更多脚本、实验性分析流程和正在整理中的工具项目，会先放在 GitHub 上持续更新。</p>
             <p class="project-meta">{{ site.author.github }}</p>
           </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section-row">
-      <div class="section-label">
-        <h2>Links</h2>
-      </div>
-      <div class="section-content">
-        <div class="link-list link-list-home">
-          <a href="{{ site.links.github }}" target="_blank" rel="noreferrer">
-            <strong>GitHub</strong>
-            <span>代码仓库、公开主页与项目入口</span>
-          </a>
-          <a href="{{ site.links.orcid }}" target="_blank" rel="noreferrer">
-            <strong>ORCID</strong>
-            <span>研究身份主页</span>
-          </a>
-          <a href="{{ '/archive/' | relative_url }}">
-            <strong>Archive</strong>
-            <span>按年份浏览全部文章与记录</span>
-          </a>
-          <a href="{{ '/tags/' | relative_url }}">
-            <strong>Tags</strong>
-            <span>按主题查找文章</span>
-          </a>
-          <a href="{{ '/search/' | relative_url }}">
-            <strong>Search</strong>
-            <span>搜索标题、摘要与正文关键词</span>
-          </a>
         </div>
       </div>
     </section>

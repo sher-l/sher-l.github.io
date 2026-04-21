@@ -4,34 +4,56 @@
   {% assign list_limit = site.posts.size %}
 {% endif %}
 
-<div class="post-card-list">
+{% assign list_variant = include.variant | default: 'default' %}
+
+<div class="post-card-list post-card-list-{{ list_variant }}">
   {% for post in site.posts limit: list_limit %}
     {% assign reading_units = post.content | strip_html | strip_newlines | size %}
     {% assign reading_minutes = reading_units | divided_by: 360 %}
     {% if reading_minutes < 1 %}
       {% assign reading_minutes = 1 %}
     {% endif %}
-    <article class="post-card">
-      <a class="post-card-link" href="{{ post.url | relative_url }}">
-        <div class="post-card-main">
-          <time class="post-card-date" datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %-d, %Y" }}</time>
-          <div class="post-card-head">
+    <article class="post-card{% if list_variant == 'home' %} post-card-home{% endif %}">
+      <a class="post-card-link{% if list_variant == 'home' %} post-card-link-home{% endif %}" href="{{ post.url | relative_url }}">
+        {% if list_variant == 'home' %}
+          <time class="post-card-date post-card-date-home" datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %-d, %Y" }}</time>
+          <div class="post-card-head post-card-head-home">
             <h3>{{ post.title }}</h3>
             <span class="post-card-arrow">→</span>
           </div>
-          <p>{{ post.excerpt | strip_html | strip_newlines | truncate: 132 }}</p>
-          <div class="post-card-stats">
+          <p class="post-card-excerpt post-card-excerpt-home">{{ post.excerpt | strip_html | strip_newlines | truncate: 132 }}</p>
+          <div class="post-card-stats post-card-stats-home">
             <span>{{ reading_minutes }} min read</span>
             <span>中文</span>
           </div>
-          <div class="post-card-meta">
+          <div class="post-card-meta post-card-meta-home">
             {% if post.categories and post.categories != empty %}
               {% for category in post.categories %}
                 <a href="{{ '/tags/' | relative_url }}#{{ category | slugify }}"><span>{{ category }}</span></a>
               {% endfor %}
             {% endif %}
           </div>
-        </div>
+        {% else %}
+          <div class="post-card-main">
+            <time class="post-card-date" datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %-d, %Y" }}</time>
+            <div class="post-card-head">
+              <h3>{{ post.title }}</h3>
+              <span class="post-card-arrow">→</span>
+            </div>
+            <p>{{ post.excerpt | strip_html | strip_newlines | truncate: 132 }}</p>
+            <div class="post-card-stats">
+              <span>{{ reading_minutes }} min read</span>
+              <span>中文</span>
+            </div>
+            <div class="post-card-meta">
+              {% if post.categories and post.categories != empty %}
+                {% for category in post.categories %}
+                  <a href="{{ '/tags/' | relative_url }}#{{ category | slugify }}"><span>{{ category }}</span></a>
+                {% endfor %}
+              {% endif %}
+            </div>
+          </div>
+        {% endif %}
       </a>
     </article>
   {% endfor %}

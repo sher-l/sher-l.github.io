@@ -343,13 +343,21 @@ img {
 .home-sections {
   display: flex;
   flex-direction: column;
-  gap: 48px;
+  gap: 22px;
   margin-top: 24px;
 }
 
 .section-row {
   display: flex;
   gap: 28px;
+}
+
+.home-sections > .section-row {
+  padding: 26px 28px;
+  border: 1px solid var(--line);
+  border-radius: 28px;
+  background: rgba(255, 255, 255, 0.42);
+  box-shadow: var(--shadow);
 }
 
 .section-label {
@@ -366,7 +374,7 @@ img {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 16px;
 }
 
 .section-kicker {
@@ -839,6 +847,61 @@ img {
   background: transparent;
 }
 
+.post-card-list-home {
+  gap: 14px;
+  border-top: 0;
+}
+
+.post-card-home {
+  border-bottom: 0;
+}
+
+.post-card-link-home {
+  display: grid;
+  grid-template-columns: 82px minmax(0, 1.05fr) minmax(0, 1.5fr) 72px;
+  grid-template-areas:
+    "date title excerpt stats"
+    ". meta excerpt stats";
+  gap: 14px 18px;
+  align-items: start;
+  padding: 18px 20px;
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.46);
+}
+
+.post-card-date-home {
+  grid-area: date;
+  line-height: 1.5;
+}
+
+.post-card-head-home {
+  grid-area: title;
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.post-card-excerpt-home {
+  grid-area: excerpt;
+  max-width: none;
+}
+
+.post-card-stats-home {
+  grid-area: stats;
+  justify-self: end;
+  align-self: start;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+  white-space: nowrap;
+}
+
+.post-card-meta-home {
+  grid-area: meta;
+}
+
 .post-card-main {
   min-width: 0;
   flex: 1;
@@ -1095,6 +1158,10 @@ img {
   .home-grid-2 {
     grid-template-columns: 1fr;
   }
+
+  .home-sections > .section-row {
+    padding: 22px 20px;
+  }
 }
 
 @media (max-width: 780px) {
@@ -1123,6 +1190,24 @@ img {
   .site-header.is-floating .nav-shell,
   .site-search-panel {
     width: calc(100vw - 20px);
+  }
+
+  .post-card-link-home {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "date"
+      "title"
+      "excerpt"
+      "stats"
+      "meta";
+    gap: 10px;
+  }
+
+  .post-card-stats-home {
+    justify-self: start;
+    align-items: flex-start;
+    flex-direction: row;
+    gap: 12px;
   }
 }
 
