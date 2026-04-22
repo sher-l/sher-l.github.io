@@ -2,6 +2,7 @@
 layout: post
 title: "Codex CLI 指令速查表"
 date: 2026-04-22
+updated: 2026-04-22
 categories: [codex, cli]
 description: "Codex CLI 的安装、登录、常用快捷键、斜杠命令、启动参数、AGENTS.md 与配置速查。"
 ---

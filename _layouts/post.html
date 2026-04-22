@@ -8,6 +8,7 @@ layout: default
   {% assign reading_minutes = 1 %}
 {% endif %}
 {% assign article_deck = page.description | default: page.excerpt | strip_html | strip_newlines | truncate: 140 %}
+{% assign updated_at = page.updated | default: page.last_modified_at %}
 
 <article class="reading-shell">
   <a class="back-link" href="{{ '/blog/' | relative_url }}" data-back-link>Back</a>
@@ -16,7 +17,10 @@ layout: default
     <div class="reading-main">
       <header class="article-header" id="content-header">
         <div class="article-meta-line">
-          <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%b %-d, %Y" }}</time>
+          <span>Created <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%b %-d, %Y" }}</time></span>
+          {% if updated_at and updated_at != page.date %}
+            <span>Updated <time datetime="{{ updated_at | date_to_xmlschema }}">{{ updated_at | date: "%b %-d, %Y" }}</time></span>
+          {% endif %}
           <span>{{ reading_minutes }} min read</span>
           <span>中文</span>
           {% if page.categories and page.categories != empty %}
