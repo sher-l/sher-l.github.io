@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
       try {
         const referrer = new URL(document.referrer, window.location.href);
         if (referrer.origin !== window.location.origin) return;
+        if (referrer.pathname === window.location.pathname) return;
       } catch {
         return;
       }
