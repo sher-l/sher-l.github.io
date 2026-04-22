@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   backLinks.forEach((link) => {
     link.addEventListener("click", (event) => {
+      if (link.dataset.backLink === "fixed") return;
       if (window.history.length <= 1 || !document.referrer) return;
 
       try {
