@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Codex CLI 指令速查表"
+title: "Codex CLI 速查整理"
 date: 2026-04-22
 updated: 2026-04-22
 categories: [codex, cli]
@@ -44,11 +44,9 @@ npm i -g @openai/codex
 codex --version
 ```
 
-如果是 macOS，也可以装桌面应用版本。
-
 ### Windows
 
-Windows 上能跑，但更推荐 **WSL2**。
+Windows 上能跑，常见稳定路径是 **WSL2**。
 
 原因很简单：
 
@@ -75,7 +73,7 @@ codex login
 codex login --device-code
 ```
 
-如果是在远程机、SSH 或没有浏览器的环境里，`--device-code` 会更省事。
+远程机、SSH 或无浏览器环境通常直接用 `--device-code`。
 
 ---
 
@@ -120,7 +118,7 @@ git clone <repo>
 - `Ctrl+D` 退出
 - `Ctrl+K` 清屏
 
-### 常用到离谱的几个
+### 高频项
 
 - `Up / Down` 翻输入历史
 - `Tab` 自动补全
@@ -394,11 +392,11 @@ README 和文档里高频提到的有这些：
 
 ### 适用边界
 
-如果只是个人开发、临时修 bug、写点脚本：
+下面这类场景通常不需要 OMX：
 
 - 原生 Codex CLI 就够了
 
-如果你开始碰到下面这些情况：
+下面这类场景更适合 OMX：
 
 - 需求要先澄清再规划
 - 一个任务跨很多模块
@@ -418,7 +416,7 @@ README 和文档里高频提到的有这些：
 
 我本机当前识别到的 `codex.exe` 版本是 `0.122.0-alpha.13`。但当前这个 Windows 环境下直接执行 `codex --help` 被系统拒绝访问，所以这一节的参数说明以官方 CLI Reference 为准。
 
-### 顶层命令可以先记这些
+### 顶层命令
 
 - `codex`
   进入交互式 TUI，会话主入口
@@ -479,7 +477,7 @@ README 和文档里高频提到的有这些：
 
 ### `codex exec`
 
-`codex exec` 适合：
+适用场景：
 
 - 脚本
 - CI
@@ -553,7 +551,7 @@ codex resume <SESSION_ID>
 
 ### `codex fork`
 
-适合这种场景：
+适用场景：
 
 - 老会话还想保留
 - 但你想从某个历史节点分叉新路线
@@ -614,7 +612,7 @@ codex login status
 
 ### `codex mcp`
 
-这是 MCP 管理面，主要用于：
+主要用途：
 
 - 列出服务器
 - 添加服务器
@@ -686,7 +684,7 @@ codex login status
 
 ## 最小使用路径
 
-如果目标是先稳定用起来，可以直接按下面的顺序：
+稳定使用时可以直接按下面的顺序：
 
 1. 用 WSL2
 2. 项目放 Linux 文件系统
