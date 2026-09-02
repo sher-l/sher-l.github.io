@@ -43,13 +43,15 @@
     for (var j = 0; j < DUST_N; j++) {
       var ang = Math.random() * Math.PI * 2;
       var sp = DUST_SPEED * (0.25 + Math.random() * 0.5);
+      var ratio = 0.5 + Math.pow(Math.random(), 1.6);
       motes.push({
         x: Math.random() * W, y: Math.random() * H,
         vx: Math.cos(ang) * sp, vy: Math.sin(ang) * sp,
         sp: sp,
         tang: Math.random() * Math.PI * 2,
         reT: 180 + Math.random() * 300,
-        r: DUST_SIZE * (0.5 + Math.pow(Math.random(), 1.6)),
+        r: DUST_SIZE * ratio,
+        s: ratio * ratio,               /* 引力强度 ∝ 大小（面积） */
         deep: Math.random() < 0.35,
         phase: Math.random() * Math.PI * 2,
         freq: 0.8 + Math.random() * 1.2
@@ -74,9 +76,11 @@
       p.hx += p.hvx; p.hy += p.hvy;
       if (p.hx < 0 || p.hx > W) p.hvx *= -1;
       if (p.hy < 0 || p.hy > H) p.hvy *= -1;
-      p.vx += (p.hx - p.x) * 0.012;
-      p.vy += (p.hy - p.y) * 0.012;
-      p.vx *= 0.9; p.vy *= 0.9;
+      p.vx += (p.hx - p.x) * 0.0015;
+      p.vy += (p.hy - p.y) * 0.0015;
+      p.vx *= 0.92; p.vy *= 0.92;
+      var ns = Math.hypot(p.vx, p.vy);
+      if (ns > 2.5) { p.vx *= 2.5 / ns; p.vy *= 2.5 / ns; }
       p.x += p.vx; p.y += p.vy;
     }
 
@@ -112,13 +116,16 @@
           var lo = (1 - dist / DUST_LINK) * 0.5 * breath;
           if (lo > 0.02) {
             ctx.strokeStyle = "rgba(232,201,122," + lo + ")";
+            ctx.lineWidth = 0.8 + mo.s * 0.6;
             ctx.beginPath(); ctx.moveTo(mo.x, mo.y); ctx.lineTo(n.x, n.y); ctx.stroke();
           }
-          var off = Math.hypot(n.x - n.hx, n.y - n.hy);
-          if (off < 30) {
-            n.vx += (mo.x - n.x) / dist * 0.02;
-            n.vy += (mo.y - n.y) / dist * 0.04;
-          }
+          /* 拖拽强度 ∝ 粉尘大小：速度耦合（大点拖着节点走）+ 绳索张力；
+             多粉尘合力对抗锚点弹簧：僵持（角力）或拉断（挣脱） */
+          n.vx += (mo.vx - n.vx) * 0.012 * mo.s;
+          n.vy += (mo.vy - n.vy) * 0.012 * mo.s;
+          var tension = Math.min(1, Math.max(0, (dist - 40) / 60));
+          n.vx += (mo.x - n.x) / dist * 0.005 * mo.s * tension;
+          n.vy += (mo.y - n.y) / dist * 0.005 * mo.s * tension;
           n.linked = true;
         } else if (n.linked) {
           n.vx += (n.x - mo.x) / dist * 0.3;
