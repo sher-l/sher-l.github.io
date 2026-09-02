@@ -84,15 +84,23 @@
       p.x += p.vx; p.y += p.vy;
     }
 
-    /* 网络：绿系节点间连线 */
-    ctx.lineWidth = 1;
+    /* 网络：绿系节点间连线 + 短程斥力（节点互相排斥，防止最终挤成一团） */
+    var MIN_GAP = 26;
     for (var a = 0; a < nodes.length; a++) for (var b = a + 1; b < nodes.length; b++) {
       var n1 = nodes[a], n2 = nodes[b];
       var dx = n1.x - n2.x, dy = n1.y - n2.y, d2 = dx * dx + dy * dy;
       if (d2 < LINK * LINK) {
         var o = (1 - Math.sqrt(d2) / LINK) * 0.3;
         ctx.strokeStyle = "rgba(111,199,164," + o + ")";
+        ctx.lineWidth = 1;
         ctx.beginPath(); ctx.moveTo(n1.x, n1.y); ctx.lineTo(n2.x, n2.y); ctx.stroke();
+      }
+      if (d2 < MIN_GAP * MIN_GAP) {
+        var dd = Math.sqrt(d2) || 1;
+        var push = (1 - dd / MIN_GAP) * 0.06;
+        var ux = dx / dd, uy = dy / dd;
+        n1.vx += ux * push; n1.vy += uy * push;
+        n2.vx -= ux * push; n2.vy -= uy * push;
       }
     }
 
