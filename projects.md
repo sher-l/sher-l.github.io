@@ -14,9 +14,9 @@ eyebrow: Projects
   </article>
 
   <article class="project-entry">
-    <h2><a href="https://sher-l.github.io/bio-dev/" target="_blank" rel="noreferrer">bio-dev · 生信技能库</a></h2>
-    <p>我的生物信息学 AI 技能库：技能索引、安装指南与快速开始，供 Codex / Claude Code 等 Agent 直接调用。</p>
-    <p class="project-meta">Site: sher-l.github.io/bio-dev</p>
+    <h2><a href="https://sher-l.github.io/ai-skills/" target="_blank" rel="noreferrer">ai-skills · AI 技能库</a></h2>
+    <p>我的 AI 技能库：技能索引、安装指南与快速开始，供 Codex / Claude Code 等 Agent 直接调用。</p>
+    <p class="project-meta">Site: sher-l.github.io/ai-skills</p>
   </article>
 
   <article class="project-entry">
