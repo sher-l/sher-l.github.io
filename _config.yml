@@ -14,8 +14,8 @@ profile:
     - R
     - Python
     - Linux
-    - Git
-    - VS Code
+    - Codex
+    - GLM
 links:
   github: "https://github.com/sher-l"
   orcid: "https://orcid.org/0009-0007-8321-9786"
