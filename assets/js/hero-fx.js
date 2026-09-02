@@ -40,13 +40,21 @@
       });
     }
     motes = [];
-    for (var j = 0; j < DUST_N; j++) motes.push({
-      x: Math.random() * W, y: Math.random() * H,
-      phase: Math.random() * Math.PI * 2,
-      sp: DUST_SPEED * (0.7 + Math.random() * 0.6),
-      r: DUST_SIZE * (0.75 + Math.random() * 0.5),
-      deep: Math.random() < 0.35
-    });
+    for (var j = 0; j < DUST_N; j++) {
+      var ang = Math.random() * Math.PI * 2;
+      var sp = DUST_SPEED * (0.25 + Math.random() * 0.5);
+      motes.push({
+        x: Math.random() * W, y: Math.random() * H,
+        vx: Math.cos(ang) * sp, vy: Math.sin(ang) * sp,
+        sp: sp,
+        tang: Math.random() * Math.PI * 2,
+        reT: 180 + Math.random() * 300,
+        r: DUST_SIZE * (0.5 + Math.pow(Math.random(), 1.6)),
+        deep: Math.random() < 0.35,
+        phase: Math.random() * Math.PI * 2,
+        freq: 0.8 + Math.random() * 1.2
+      });
+    }
   }
   function step() {
     t += 1 / 60;
@@ -84,41 +92,46 @@
       }
     }
 
-    /* 粉尘：上升 + 与节点互动（连上 → 拖拽 → 挣脱弹开 → 弹簧回位） */
+    /* 粉尘：随机方向漫游 + 呼吸明暗 + 与节点互动 */
     for (var m = 0; m < motes.length; m++) {
       var mo = motes[m];
-      mo.y -= mo.sp;
-      var px = mo.x + Math.sin(t * 1.4 + mo.phase) * 8;
-      if (mo.y < -12) { mo.y = H + 8; mo.x = Math.random() * W; }
-      var fade = Math.max(0, Math.min(1, (H - mo.y) / (H * 0.12), mo.y / (H * 0.25)));
+      mo.reT -= 1;
+      if (mo.reT <= 0) { mo.tang = Math.random() * Math.PI * 2; mo.reT = 180 + Math.random() * 300; }
+      mo.vx += (Math.cos(mo.tang) * mo.sp - mo.vx) * 0.01;
+      mo.vy += (Math.sin(mo.tang) * mo.sp - mo.vy) * 0.01;
+      mo.x += mo.vx; mo.y += mo.vy;
+      if (mo.x < -12) mo.x = W + 12; else if (mo.x > W + 12) mo.x = -12;
+      if (mo.y < -12) mo.y = H + 12; else if (mo.y > H + 12) mo.y = -12;
+      var breath = 0.18 + 0.82 * (0.5 + 0.5 * Math.sin(t * mo.freq * 2 + mo.phase));
+      var rb = mo.r * (0.88 + 0.12 * Math.sin(t * mo.freq * 2 + mo.phase));
 
       for (var k = 0; k < nodes.length; k++) {
         var n = nodes[k];
-        var ndx = n.x - px, ndy = n.y - mo.y, dist = Math.hypot(ndx, ndy) || 1;
+        var ndx = n.x - mo.x, ndy = n.y - mo.y, dist = Math.hypot(ndx, ndy) || 1;
         if (dist < DUST_LINK) {
-          var lo = (1 - dist / DUST_LINK) * 0.5 * fade;
+          var lo = (1 - dist / DUST_LINK) * 0.5 * breath;
           if (lo > 0.02) {
             ctx.strokeStyle = "rgba(232,201,122," + lo + ")";
-            ctx.beginPath(); ctx.moveTo(px, mo.y); ctx.lineTo(n.x, n.y); ctx.stroke();
+            ctx.beginPath(); ctx.moveTo(mo.x, mo.y); ctx.lineTo(n.x, n.y); ctx.stroke();
           }
           var off = Math.hypot(n.x - n.hx, n.y - n.hy);
           if (off < 30) {
-            n.vx += (px - n.x) / dist * 0.02;
+            n.vx += (mo.x - n.x) / dist * 0.02;
             n.vy += (mo.y - n.y) / dist * 0.04;
           }
           n.linked = true;
         } else if (n.linked) {
-          n.vy -= 0.28;
-          n.vx += (Math.random() - 0.5) * 0.25;
+          n.vx += (n.x - mo.x) / dist * 0.3;
+          n.vy += (n.y - mo.y) / dist * 0.3;
           n.linked = false;
         }
       }
 
       var core = mo.deep ? "60,147,115" : "111,199,164";
-      ctx.fillStyle = "rgba(" + core + "," + 0.22 * fade + ")";
-      ctx.beginPath(); ctx.arc(px, mo.y, mo.r * 2.4, 0, Math.PI * 2); ctx.fill();
-      ctx.fillStyle = "rgba(" + core + "," + 0.85 * fade + ")";
-      ctx.beginPath(); ctx.arc(px, mo.y, mo.r, 0, Math.PI * 2); ctx.fill();
+      ctx.fillStyle = "rgba(" + core + "," + 0.22 * breath + ")";
+      ctx.beginPath(); ctx.arc(mo.x, mo.y, rb * 2.4, 0, Math.PI * 2); ctx.fill();
+      ctx.fillStyle = "rgba(" + core + "," + 0.85 * breath + ")";
+      ctx.beginPath(); ctx.arc(mo.x, mo.y, rb, 0, Math.PI * 2); ctx.fill();
     }
 
     /* 网络节点 */
