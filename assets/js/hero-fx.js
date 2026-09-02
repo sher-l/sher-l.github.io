@@ -30,8 +30,10 @@
       var x = Math.random() * W, y = Math.random() * H;
       nodes.push({
         x: x, y: y, vx: 0, vy: 0,             /* 实际位置：弹簧追随锚点 */
-        hx: x, hy: y,                          /* 锚点：自身缓慢漂移 */
-        hvx: (Math.random() - 0.5) * 0.4, hvy: (Math.random() - 0.5) * 0.4,
+        hx: x, hy: y,                          /* 锚点：漫游漂移 */
+        hvx: (Math.random() - 0.5) * 0.5, hvy: (Math.random() - 0.5) * 0.5,
+        tvx: (Math.random() - 0.5) * 0.7, tvy: (Math.random() - 0.5) * 0.7,
+        reT: 120 + Math.random() * 240,
         r: Math.random() * 1.7 + 0.9,
         gold: Math.random() < 0.12,
         linked: false
@@ -50,14 +52,22 @@
     t += 1 / 60;
     ctx.clearRect(0, 0, W, H);
 
-    /* 锚点漂移 + 弹簧回位 */
+    /* 锚点漫游（定期换向 + 平滑转向）+ 弹簧回位 */
     for (var i = 0; i < nodes.length; i++) {
       var p = nodes[i];
+      p.reT -= 1;
+      if (p.reT <= 0) {
+        p.tvx = (Math.random() - 0.5) * 0.7;
+        p.tvy = (Math.random() - 0.5) * 0.7;
+        p.reT = 120 + Math.random() * 240;
+      }
+      p.hvx += (p.tvx - p.hvx) * 0.02;
+      p.hvy += (p.tvy - p.hvy) * 0.02;
       p.hx += p.hvx; p.hy += p.hvy;
       if (p.hx < 0 || p.hx > W) p.hvx *= -1;
       if (p.hy < 0 || p.hy > H) p.hvy *= -1;
-      p.vx += (p.hx - p.x) * 0.01;
-      p.vy += (p.hy - p.y) * 0.01;
+      p.vx += (p.hx - p.x) * 0.012;
+      p.vy += (p.hy - p.y) * 0.012;
       p.vx *= 0.9; p.vy *= 0.9;
       p.x += p.vx; p.y += p.vy;
     }
@@ -92,9 +102,9 @@
             ctx.beginPath(); ctx.moveTo(px, mo.y); ctx.lineTo(n.x, n.y); ctx.stroke();
           }
           var off = Math.hypot(n.x - n.hx, n.y - n.hy);
-          if (off < 24) {
-            n.vx += (px - n.x) / dist * 0.015;
-            n.vy += (mo.y - n.y) / dist * 0.03;
+          if (off < 30) {
+            n.vx += (px - n.x) / dist * 0.02;
+            n.vy += (mo.y - n.y) / dist * 0.04;
           }
           n.linked = true;
         } else if (n.linked) {
