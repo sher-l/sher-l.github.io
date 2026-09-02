@@ -1,7 +1,8 @@
 /* Hero 动效引擎（与 bio-dev 一致）：连线网络 + 上升粉尘 + 粉尘扰动网络。
-   粉尘上升途中靠近网络节点时拉出金色细线（连上）并轻微拖拽节点；
-   飞离连线范围的瞬间节点被向上弹开（挣脱）。
-   数量/尺寸/速度由 CSS 变量 --fx-* 控制；仅在桌面端全量运行，移动端减半。 */
+   物理：每个节点有缓慢漂移的锚点（home），节点经弹簧追随锚点；
+   粉尘靠近时拉出金色细线并把节点拖走一小段（限幅 24px），
+   飞离瞬间节点受到向上冲量被"挣脱"，随后弹簧把它拉回锚点回弹——网络整体不散。
+   数量/尺寸/速度由 CSS 变量 --fx-* 控制；移动端减半；尊重系统减少动效偏好。 */
 (function () {
   "use strict";
   var canvas = document.getElementById("homeHeroCanvas");
@@ -25,13 +26,17 @@
   function resize() { W = canvas.width = canvas.offsetWidth; H = canvas.height = canvas.offsetHeight; }
   function init() {
     nodes = [];
-    for (var i = 0; i < NODE_N; i++) nodes.push({
-      x: Math.random() * W, y: Math.random() * H,
-      vx: (Math.random() - 0.5) * 0.4, vy: (Math.random() - 0.5) * 0.4,
-      r: Math.random() * 1.7 + 0.9,
-      gold: Math.random() < 0.12,
-      linked: false
-    });
+    for (var i = 0; i < NODE_N; i++) {
+      var x = Math.random() * W, y = Math.random() * H;
+      nodes.push({
+        x: x, y: y, vx: 0, vy: 0,             /* 实际位置：弹簧追随锚点 */
+        hx: x, hy: y,                          /* 锚点：自身缓慢漂移 */
+        hvx: (Math.random() - 0.5) * 0.4, hvy: (Math.random() - 0.5) * 0.4,
+        r: Math.random() * 1.7 + 0.9,
+        gold: Math.random() < 0.12,
+        linked: false
+      });
+    }
     motes = [];
     for (var j = 0; j < DUST_N; j++) motes.push({
       x: Math.random() * W, y: Math.random() * H,
@@ -45,14 +50,16 @@
     t += 1 / 60;
     ctx.clearRect(0, 0, W, H);
 
-    /* 网络漂移（限速，防止被扰动力加速失控） */
+    /* 锚点漂移 + 弹簧回位 */
     for (var i = 0; i < nodes.length; i++) {
       var p = nodes[i];
-      var s = Math.hypot(p.vx, p.vy);
-      if (s > 1.3) { p.vx *= 1.3 / s; p.vy *= 1.3 / s; }
+      p.hx += p.hvx; p.hy += p.hvy;
+      if (p.hx < 0 || p.hx > W) p.hvx *= -1;
+      if (p.hy < 0 || p.hy > H) p.hvy *= -1;
+      p.vx += (p.hx - p.x) * 0.01;
+      p.vy += (p.hy - p.y) * 0.01;
+      p.vx *= 0.9; p.vy *= 0.9;
       p.x += p.vx; p.y += p.vy;
-      if (p.x < 0 || p.x > W) p.vx *= -1;
-      if (p.y < 0 || p.y > H) p.vy *= -1;
     }
 
     /* 网络：绿系节点间连线 */
@@ -67,7 +74,7 @@
       }
     }
 
-    /* 粉尘：上升 + 与节点互动 */
+    /* 粉尘：上升 + 与节点互动（连上 → 拖拽 → 挣脱弹开 → 弹簧回位） */
     for (var m = 0; m < motes.length; m++) {
       var mo = motes[m];
       mo.y -= mo.sp;
@@ -84,11 +91,15 @@
             ctx.strokeStyle = "rgba(232,201,122," + lo + ")";
             ctx.beginPath(); ctx.moveTo(px, mo.y); ctx.lineTo(n.x, n.y); ctx.stroke();
           }
-          n.vx += (px - n.x) / dist * 0.004;
-          n.vy += (mo.y - n.y) / dist * 0.012;
+          var off = Math.hypot(n.x - n.hx, n.y - n.hy);
+          if (off < 24) {
+            n.vx += (px - n.x) / dist * 0.015;
+            n.vy += (mo.y - n.y) / dist * 0.03;
+          }
           n.linked = true;
         } else if (n.linked) {
-          n.vy -= 0.12;
+          n.vy -= 0.28;
+          n.vx += (Math.random() - 0.5) * 0.25;
           n.linked = false;
         }
       }
