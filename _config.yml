@@ -10,7 +10,6 @@ author:
 profile:
   handle: "~$herLock"
   summary: "Building tools and analysis pipelines with R, Python, and Linux."
-  focus: "Dark Factory"
   tech_stack:
     - R
     - Python

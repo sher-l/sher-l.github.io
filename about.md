@@ -1,7 +1,7 @@
 ---
 layout: page
 title: About
-description: 关于站点和当前的工作方向。
+description: 关于站点。
 permalink: /about/
 eyebrow: About
 ---
@@ -10,11 +10,6 @@ eyebrow: About
   <section>
     <h2>About me</h2>
     <p>{{ site.profile.summary }}</p>
-  </section>
-
-  <section>
-    <h2>Current focus</h2>
-    <p>{{ site.profile.focus }}</p>
   </section>
 
   <section>

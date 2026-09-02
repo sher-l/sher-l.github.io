@@ -14,7 +14,6 @@ layout: default
     <p class="home-hero-tagline">{{ site.tagline | default: site.description }}</p>
     <div class="home-label-row">
       <span>{{ site.profile.handle }}</span>
-      <span>{{ site.profile.focus }}</span>
       <a href="{{ site.links.github }}" target="_blank" rel="noreferrer">GitHub</a>
       <a href="{{ site.links.orcid }}" target="_blank" rel="noreferrer">ORCID</a>
     </div>
@@ -31,10 +30,6 @@ layout: default
           {{ content }}
         </div>
         <p>{{ site.profile.summary }}</p>
-        <p>
-          当前重点方向是 {{ site.profile.focus }}，持续维护项目是
-          <a href="{{ site.featured_project.url }}" target="_blank" rel="noreferrer">{{ site.featured_project.name }}</a>。
-        </p>
         <div class="chip-list">
           {% for item in site.profile.tech_stack %}
             <span>{{ item }}</span>
